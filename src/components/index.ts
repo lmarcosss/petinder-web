@@ -1,1 +1,2 @@
-export { Header } from './Header/index';
+export { Header } from './Header';
+export { Announcements } from './Announcements';
