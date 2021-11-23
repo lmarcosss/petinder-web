@@ -10,13 +10,36 @@ import {
   Stack,
   Link,
   Text,
+  MenuList,
+  MenuItem,
+  Icon,
+  MenuButton,
+  Menu,
+  Flex,
+  IconButton,
 } from '@chakra-ui/react';
-
-import { useSidebarDrawer } from '../../contexts/SidebarDrawerContext';
+import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
+import { RiMenuLine, RiUser3Fill } from 'react-icons/ri';
 
 const MENU_ITEMS = [
   {
-    title: 'Sobre',
+    title: 'Meu Perfil',
+    anchor: '#about',
+  },
+  {
+    title: 'Minhas Solicitações',
+    anchor: '#about',
+  },
+  {
+    title: 'Meus Anúncios',
+    anchor: '#about',
+  },
+  {
+    title: 'Cadastro',
+    anchor: '#about',
+  },
+  {
+    title: 'Login',
     anchor: '#about',
   },
 ];
@@ -36,12 +59,12 @@ export function Navbar() {
 
   if (isDrawerSidebar) {
     return (
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay>
-          <DrawerContent bg="gray.800" p="4">
+          <DrawerContent bg="teal.700" p="4">
             <DrawerCloseButton mt="6" color="white" />
             <DrawerHeader>
-              <Text color="green.500">Navegação</Text>
+              <Text color="orange.500">Menu</Text>
             </DrawerHeader>
             <DrawerBody>
               <Stack display="flex" spacing="8">
@@ -61,12 +84,34 @@ export function Navbar() {
   }
 
   return (
-    <Stack pl="8" display="flex" direction="row" spacing="8">
-      {MENU_ITEMS.map((item, index) => (
-        <Link href={item.anchor} key={index} color="white">
-          {item.title}
-        </Link>
-      ))}
-    </Stack>
+    <Menu>
+      {!isDrawerSidebar && (
+        <MenuButton
+          as={IconButton}
+          aria-label="Open navigation"
+          icon={
+            <Flex
+              align="center"
+              justify="center"
+              backgroundColor="white"
+              borderRadius="24px"
+              p="4px 5px"
+            >
+              <Icon color="teal.500" fontSize="20" m="1" as={RiMenuLine} />
+              <Icon color="teal.500" fontSize="20" m="1" as={RiUser3Fill} />
+            </Flex>
+          }
+          fontSize="20"
+          variant="unstyled"
+          color="white"
+          mb="1"
+        />
+      )}
+      <MenuList>
+        {MENU_ITEMS.map((item) => (
+          <MenuItem>{item.title}</MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
   );
 }

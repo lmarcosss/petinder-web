@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react';
+import { SidebarDrawerProvider } from '@contexts/SidebarDrawerContext';
 
 function App({ Component, pageProps }) {
   return (
@@ -9,10 +10,12 @@ function App({ Component, pageProps }) {
       </Head>
 
       <ChakraProvider>
-        <Component {...pageProps} />
+        <SidebarDrawerProvider>
+          <Component {...pageProps} />
+        </SidebarDrawerProvider>
       </ChakraProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

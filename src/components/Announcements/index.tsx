@@ -7,7 +7,14 @@ interface IProps {
 
 export function Announcements({ announcements }: IProps) {
   return (
-    <Grid pt="24" pl="4" pr="4" templateColumns="repeat(5, 1fr)" gap={6}>
+    <Grid
+      width="100%"
+      pt={['20', '24']}
+      pl={['4']}
+      pr={['4']}
+      templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+      gap="4"
+    >
       {announcements.map((data, index) => (
         <Announcement key={index} data={data} />
       ))}
