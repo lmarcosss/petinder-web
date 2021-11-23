@@ -9,7 +9,7 @@ export function Announcements({ announcements }: IProps) {
   return (
     <Grid
       width="100%"
-      pt={['20', '24']}
+      mt="18"
       pl={['4']}
       pr={['4']}
       templateColumns="repeat(auto-fill, minmax(300px, 1fr))"

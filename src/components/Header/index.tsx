@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Flex, useBreakpointValue, Icon, Text, IconButton } from '@chakra-ui/react';
+import { Flex, Icon, Text, IconButton } from '@chakra-ui/react';
 import { RiMenuLine, RiUser3Fill } from 'react-icons/ri';
 
 import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
@@ -13,10 +13,6 @@ export function Header() {
   const [prevScroll, setPrevScroll] = useState(0);
   const { onOpen } = useSidebarDrawer();
   const [isVisible, setVisible] = useState(true);
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    lg: true,
-  });
 
   function handleScroll() {
     const currentScroll = window.pageYOffset;
@@ -46,27 +42,25 @@ export function Header() {
           PeTinder
         </Text>
       </Flex>
-      {!isWideVersion && (
-        <IconButton
-          aria-label="Open navigation"
-          icon={
-            <Flex
-              align="center"
-              justify="center"
-              backgroundColor="white"
-              borderRadius="24px"
-              p={['4px 8px', '4px 5px']}
-            >
-              <Icon color="teal.500" fontSize="20" m="1" as={RiMenuLine} />
-              <Icon color="teal.500" fontSize="20" m="1" as={RiUser3Fill} />
-            </Flex>
-          }
-          fontSize="24"
-          variant="unstyled"
-          color="white"
-          onClick={onOpen}
-        />
-      )}
+      <IconButton
+        aria-label="Open navigation"
+        icon={
+          <Flex
+            align="center"
+            justify="center"
+            backgroundColor="white"
+            borderRadius="24px"
+            p={['4px 8px', '4px 5px']}
+          >
+            <Icon color="teal.500" fontSize="20" m="1" as={RiMenuLine} />
+            <Icon color="teal.500" fontSize="20" m="1" as={RiUser3Fill} />
+          </Flex>
+        }
+        fontSize="24"
+        variant="unstyled"
+        color="white"
+        onClick={onOpen}
+      />
       <Navbar />
     </Flex>
   );
