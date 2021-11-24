@@ -6,6 +6,7 @@ import { RiMenuLine, RiUser3Fill } from 'react-icons/ri';
 import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
 import { useWindowEvent } from '@hooks/useWindowEvent';
 import { Navbar } from './Navbar';
+import { Logo } from './Logo';
 
 const PAGE_TOP = 0;
 
@@ -37,11 +38,7 @@ export function Header() {
       align="center"
       justify="space-between"
     >
-      <Flex w="100%" pb="2">
-        <Text fontSize="30" fontWeight="bold" color="orange.400">
-          PeTinder
-        </Text>
-      </Flex>
+      <Logo />
       <IconButton
         aria-label="Open navigation"
         icon={

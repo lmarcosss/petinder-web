@@ -1,10 +1,83 @@
 import { Announcements, Header } from '../components';
 
+const data = [
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+  {
+    imageUrl:
+      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
+    name: 'O cão',
+    location: 'Bairro Centro',
+    status: 'ABERTO',
+  },
+];
+
 export default function Home() {
   return (
     <div>
       <Header />
-      <Announcements announcements={[1, 2, 3, 4, 5, 6, 7, 8, 9]} />
+      <Announcements announcements={data} />
     </div>
   );
 }
