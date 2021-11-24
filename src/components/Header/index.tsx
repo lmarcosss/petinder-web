@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Flex, Icon, Text, IconButton } from '@chakra-ui/react';
+import { Flex, Icon, IconButton } from '@chakra-ui/react';
 import { RiMenuLine, RiUser3Fill } from 'react-icons/ri';
 
 import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
