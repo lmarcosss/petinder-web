@@ -14,14 +14,14 @@ export function Announcement({ data }) {
       borderRadius="lg"
       overflow="hidden"
     >
-      <Image src={data.imageUrl} alt={data.name} />
+      <Image src={data.pictures[0].url} alt={data.name} />
 
       <Box p="6">
         <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-          {data.name}
+          {data.description}
         </Box>
 
-        <Box>{data.location}</Box>
+        <Box>{data.location || 'Bairro Centro'}</Box>
       </Box>
     </Box>
   );

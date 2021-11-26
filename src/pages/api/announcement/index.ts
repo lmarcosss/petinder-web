@@ -1,4 +1,4 @@
-import { getOpennedAnnouncements } from '@services/announcement';
+import { getOpennedAnnouncements } from '@services/petinder/announcement';
 
 export default async function announcement(req, res) {
   const { data } = await getOpennedAnnouncements();

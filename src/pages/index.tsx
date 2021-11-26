@@ -1,83 +1,28 @@
+import { getAnnouncements } from '@services/next/announcement';
+import { GetStaticProps } from 'next';
+import { IAnnouncement } from '@types';
 import { Announcements, Header } from '../components';
 
-const data = [
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-  {
-    imageUrl:
-      'https://blog.cobasi.com.br/wp-content/uploads/2021/03/por-que-o-pinscher-e-tao-bravo-capa.png',
-    name: 'O cão',
-    location: 'Bairro Centro',
-    status: 'ABERTO',
-  },
-];
+interface IProps {
+  announcements: IAnnouncement[];
+}
 
-export default function Home() {
+export default function Home({ announcements }: IProps) {
   return (
     <div>
       <Header />
-      <Announcements announcements={data} />
+      <Announcements announcements={announcements} />
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: announcements } = await getAnnouncements();
+
+  return {
+    props: {
+      announcements,
+    },
+    revalidate: 60 * 60 * 24, // 24 hours
+  };
+};
