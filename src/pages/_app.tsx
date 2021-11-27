@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { ChakraProvider } from '@chakra-ui/react';
 import { SidebarDrawerProvider } from '@contexts/SidebarDrawerContext';
 
-function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -17,5 +17,3 @@ function App({ Component, pageProps }) {
     </>
   );
 }
-
-export default App;
