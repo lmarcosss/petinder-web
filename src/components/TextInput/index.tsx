@@ -18,7 +18,7 @@ interface IProps extends InputProps {
   iconInput?: any;
 }
 
-export function TextInput({
+export var TextInput = function ({
   labelColor,
   label,
   value,
@@ -60,7 +60,7 @@ export function TextInput({
         {label}
       </Text>
       <InputGroup>
-        <InputLeftElement pointerEvents="none" children={iconInput} />
+        <InputLeftElement pointerEvents="none">{iconInput}</InputLeftElement>
         <Input
           isInvalid={!!error}
           ref={inputRef}
@@ -76,4 +76,4 @@ export function TextInput({
       {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
-}
+};

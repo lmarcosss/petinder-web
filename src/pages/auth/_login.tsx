@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Link, Text, useBreakpointValue, Box, Icon } from '@chakra-ui/react';
+import { Button, Flex, Heading, Link, Text, useBreakpointValue, Icon } from '@chakra-ui/react';
 import { TextInput } from '@components';
 import { FormLoginEnum } from 'enums';
 import { useRef } from 'react';
@@ -10,7 +10,7 @@ interface IProps {
   onChangeForm(formValue: FormLoginEnum): void;
 }
 
-export function Login({ onChangeForm }: IProps) {
+export default function Login({ onChangeForm }: IProps) {
   const formRef = useRef(null);
   const isSmallerDevices = useBreakpointValue({
     base: true,
