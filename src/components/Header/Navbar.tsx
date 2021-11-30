@@ -11,37 +11,48 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
+import { MenuEnum } from 'enums';
 
 const MENU_ITEMS = [
   {
-    title: 'Meu Perfil',
-    anchor: '#about',
+    title: MenuEnum.REGISTER_OR_LOGIN,
+    href: '/auth',
   },
   {
-    title: 'Minhas Solicitações',
-    anchor: '#about',
+    title: MenuEnum.PROFILE,
+    href: '/my-profile',
+    needAuth: true,
   },
   {
-    title: 'Meus Anúncios',
-    anchor: '#about',
+    title: MenuEnum.REQUESTS,
+    href: '/my-requests',
+    needAuth: true,
   },
   {
-    title: 'Cadastro',
-    anchor: '#about',
+    title: MenuEnum.ANNOUNCEMENTS,
+    href: '/my-announcements',
+    needAuth: true,
   },
   {
-    title: 'Login',
-    anchor: '#about',
+    title: MenuEnum.CREATE_ANNOUNCEMENT,
+    href: '/create-announcement',
+    needAuth: true,
   },
 ];
 
+interface IOnclick {
+  href: string;
+  title: MenuEnum;
+}
+
 export function Navbar() {
   const { isOpen, onClose } = useSidebarDrawer();
+
   const router = useRouter();
 
-  function onClick(anchor: string) {
+  function onClick({ href }: IOnclick) {
     onClose();
-    setTimeout(() => router.push(anchor), 200);
+    setTimeout(() => router.push(href), 200);
   }
 
   return (
@@ -55,8 +66,10 @@ export function Navbar() {
           <DrawerBody>
             <Stack display="flex" spacing="8">
               {MENU_ITEMS.map((item, index) => {
+                if (item.needAuth) return;
+
                 return (
-                  <Link key={index} onClick={() => onClick(item.anchor)} color="white">
+                  <Link key={index} onClick={() => onClick(item)} color="white">
                     {item.title}
                   </Link>
                 );
