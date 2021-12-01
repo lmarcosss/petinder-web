@@ -1,14 +1,15 @@
-import { Flex, Image, } from '@chakra-ui/react';
-import { useWindowSize } from '@hooks/useWindowsSize';
-import { FormLoginEnum } from 'enums';
-import { useState, Fragment } from 'react';
-import Login from './_login';
+import { Flex, Image, } from "@chakra-ui/react";
+import { useWindowSize } from "@hooks/useWindowsSize";
+import { FormLoginEnum } from "enums";
+import { useState } from "react";
+import Login from "./_login";
+import Register from "./_register";
 
 export default function Auth() {
   const [form, setForm] = useState(FormLoginEnum.LOGIN);
   const windowSize = useWindowSize();
 
-  const Form = form === FormLoginEnum.LOGIN ? Login : Fragment;
+  const Form = form === FormLoginEnum.LOGIN ? Login : Register;
 
   return (
     <>
@@ -16,9 +17,8 @@ export default function Auth() {
         {windowSize.width > 1530 && <Image alt="imagem de pets" width="70%" height="100%" src="/images/auth.jpeg" />}
         <Flex
           direction="column"
-          justify="center"
-          width={windowSize.width > 1530 ? '30%' : '100%'}
-          height={'100%'}
+          width={windowSize.width > 1530 ? "30%" : "100%"}
+          height={"100%"}
           shadow="md"
           backgroundColor="white"
         >
