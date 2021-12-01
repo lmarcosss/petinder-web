@@ -1,5 +1,5 @@
-import { AnnouncementStatusEnum } from 'enums';
-import { IUser } from './UserType';
+import { AnnouncementStatusEnum } from "enums";
+import { IUser } from "./UserType";
 
 export interface IPicture {
   id: number;

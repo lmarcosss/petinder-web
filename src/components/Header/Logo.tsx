@@ -1,11 +1,11 @@
-import { Flex, Text } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import { Flex, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export function Logo() {
   const router = useRouter();
 
   function onClick() {
-    router.replace('/');
+    router.replace("/");
   }
 
   return (

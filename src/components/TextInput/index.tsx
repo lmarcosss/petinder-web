@@ -6,7 +6,7 @@ import {
   FormControl,
   FormErrorMessage,
   InputGroup,
-  InputLeftElement,
+  InputLeftElement
 } from "@chakra-ui/react";
 import { useField } from "@unform/core";
 import { MutableRefObject, useEffect, useRef } from "react";
@@ -30,7 +30,7 @@ export var TextInput = function ({
   ...otherInputProps
 }: IProps) {
   const inputRef = useRef<HTMLInputElement>();
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, registerField, error, } = useField(name);
 
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -52,10 +52,10 @@ export var TextInput = function ({
       setValue,
       clearValue,
     });
-  }, [fieldName, registerField]);
+  }, [fieldName, registerField,]);
 
   return (
-    <FormControl isInvalid={!!error} pt={["4", "2"]}>
+    <FormControl isInvalid={!!error} pt={["4", "2",]}>
       <Text fontWeight="500" color={labelColor} mb="2">
         {label}
       </Text>

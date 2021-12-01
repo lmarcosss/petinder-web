@@ -1,11 +1,11 @@
-import { Box, Image } from '@chakra-ui/react';
-import { AnnouncementStatusEnum } from 'enums';
+import { Box, Image } from "@chakra-ui/react";
+import { AnnouncementStatusEnum } from "enums";
 
 const cursor = {
-  [AnnouncementStatusEnum.ABERTO]: 'pointer',
+  [AnnouncementStatusEnum.ABERTO]: "pointer",
 };
 
-export function Announcement({ data }) {
+export function Announcement({ data, }) {
   return (
     <Box
       cursor={cursor[data.status]}
@@ -21,7 +21,7 @@ export function Announcement({ data }) {
           {data.description}
         </Box>
 
-        <Box>{data.location || 'Bairro Centro'}</Box>
+        <Box>{data.location || "Bairro Centro"}</Box>
       </Box>
     </Box>
   );

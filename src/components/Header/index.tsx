@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Flex, Icon, IconButton } from '@chakra-ui/react';
-import { RiMenuLine, RiUser3Fill } from 'react-icons/ri';
+import { Flex, Icon, IconButton } from "@chakra-ui/react";
+import { RiMenuLine, RiUser3Fill } from "react-icons/ri";
 
-import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
-import { useWindowEvent } from '@hooks/useWindowEvent';
-import { Navbar } from './Navbar';
-import { Logo } from './Logo';
+import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
+import { useWindowEvent } from "@hooks/useWindowEvent";
+import { Navbar } from "./Navbar";
+import { Logo } from "./Logo";
 
 const PAGE_TOP = 0;
 
 export function Header() {
-  const [prevScroll, setPrevScroll] = useState(0);
-  const { onOpen } = useSidebarDrawer();
-  const [isVisible, setVisible] = useState(true);
+  const [prevScroll, setPrevScroll,] = useState(0);
+  const { onOpen, } = useSidebarDrawer();
+  const [isVisible, setVisible,] = useState(true);
 
   function handleScroll() {
     const currentScroll = window.pageYOffset;
@@ -23,17 +23,17 @@ export function Header() {
     setVisible(visible);
   }
 
-  useWindowEvent('scroll', handleScroll);
+  useWindowEvent("scroll", handleScroll);
 
   return (
     <Flex
       as="header"
       w="100%"
-      h={['16', '20']}
+      h={["16", "20",]}
       transition="top 0.5s"
-      top={isVisible ? '0' : '-80px'}
+      top={isVisible ? "0" : "-80px"}
       zIndex="99"
-      background="teal.500"
+      background="orange.500"
       px="6"
       align="center"
       justify="space-between"
@@ -45,12 +45,12 @@ export function Header() {
           <Flex
             align="center"
             justify="center"
-            backgroundColor="white"
+            backgroundColor="orange"
             borderRadius="24px"
-            p={['4px 8px', '4px 5px']}
+            p={["4px 8px", "4px 5px",]}
           >
-            <Icon color="teal.500" fontSize="20" m="1" as={RiMenuLine} />
-            <Icon color="teal.500" fontSize="20" m="1" as={RiUser3Fill} />
+            <Icon color="white" fontSize="20" m="1" as={RiMenuLine} />
+            <Icon color="white" fontSize="20" m="1" as={RiUser3Fill} />
           </Flex>
         }
         fontSize="24"

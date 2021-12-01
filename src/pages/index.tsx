@@ -1,13 +1,13 @@
-import { getAnnouncements } from '@services/next/announcement';
-import { GetStaticProps } from 'next';
-import { IAnnouncement } from '@types';
-import { Announcements, Header } from '../components';
+import { getAnnouncements } from "@services/next/announcement";
+import { GetStaticProps } from "next";
+import { IAnnouncement } from "@types";
+import { Announcements, Header } from "../components";
 
 interface IProps {
   announcements: IAnnouncement[];
 }
 
-export default function Home({ announcements }: IProps) {
+export default function Home({ announcements, }: IProps) {
   return (
     <div>
       <Header />
@@ -17,7 +17,7 @@ export default function Home({ announcements }: IProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: announcements } = await getAnnouncements();
+  const { data: announcements, } = await getAnnouncements();
 
   return {
     props: {

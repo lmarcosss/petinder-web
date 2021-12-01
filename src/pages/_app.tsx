@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import { ChakraProvider } from '@chakra-ui/react';
-import { SidebarDrawerProvider } from '@contexts/SidebarDrawerContext';
+import Head from "next/head";
+import { ChakraProvider } from "@chakra-ui/react";
+import { SidebarDrawerProvider } from "@contexts/SidebarDrawerContext";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, }) {
   return (
     <>
       <Head>

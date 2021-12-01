@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import {
   Drawer,
   DrawerOverlay,
@@ -8,34 +8,34 @@ import {
   DrawerContent,
   Stack,
   Link,
-  Text,
-} from '@chakra-ui/react';
-import { useSidebarDrawer } from '@contexts/SidebarDrawerContext';
-import { MenuEnum } from 'enums';
+  Text
+} from "@chakra-ui/react";
+import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
+import { MenuEnum } from "enums";
 
 const MENU_ITEMS = [
   {
     title: MenuEnum.REGISTER_OR_LOGIN,
-    href: '/auth',
+    href: "/login",
   },
   {
     title: MenuEnum.PROFILE,
-    href: '/my-profile',
+    href: "/my-profile",
     needAuth: true,
   },
   {
     title: MenuEnum.REQUESTS,
-    href: '/my-requests',
+    href: "/my-requests",
     needAuth: true,
   },
   {
     title: MenuEnum.ANNOUNCEMENTS,
-    href: '/my-announcements',
+    href: "/my-announcements",
     needAuth: true,
   },
   {
     title: MenuEnum.CREATE_ANNOUNCEMENT,
-    href: '/create-announcement',
+    href: "/create-announcement",
     needAuth: true,
   },
 ];
@@ -46,11 +46,11 @@ interface IOnclick {
 }
 
 export function Navbar() {
-  const { isOpen, onClose } = useSidebarDrawer();
+  const { isOpen, onClose, } = useSidebarDrawer();
 
   const router = useRouter();
 
-  function onClick({ href }: IOnclick) {
+  function onClick({ href, }: IOnclick) {
     onClose();
     setTimeout(() => router.push(href), 200);
   }
