@@ -1,3 +1,13 @@
 {
-  "extends": "next"
+  "extends": "next",
+  "rules" : {
+    "no-console": "off",
+     "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": [
+        "error"
+      ]
+    }
 }

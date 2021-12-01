@@ -1,10 +1,10 @@
-import { Button, Flex, Heading, Link, Text, useBreakpointValue, Icon } from '@chakra-ui/react';
-import { TextInput } from '@components';
-import { FormLoginEnum } from 'enums';
-import { useRef } from 'react';
-import { Form } from '@unform/web';
-import { FiLock, FiMail } from 'react-icons/fi';
-import * as Yup from 'yup';
+import { Button, Flex, Heading, Link, Text, useBreakpointValue, Icon } from "@chakra-ui/react";
+import { TextInput } from "@components";
+import { FormLoginEnum } from "enums";
+import { useRef } from "react";
+import { Form } from "@unform/web";
+import { FiLock, FiMail } from "react-icons/fi";
+import * as Yup from "yup";
 
 interface IProps {
   onChangeForm(formValue: FormLoginEnum): void;
@@ -17,7 +17,7 @@ export default function Login({ onChangeForm }: IProps) {
     lg: false,
   });
 
-  const buttonSize = isSmallerDevices ? 'lg' : 'lg';
+  const buttonSize = isSmallerDevices ? "lg" : "lg";
 
   function handleChangeForm() {
     onChangeForm(FormLoginEnum.REGISTER);
@@ -29,8 +29,8 @@ export default function Login({ onChangeForm }: IProps) {
       if (formRef?.current) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
-          email: Yup.string().email('E-mail deve ser válido').required('E-mail é obrigatório'),
-          password: Yup.string().min(6, 'Mínimo de 6 caracteres').required('Senha é obrigatória'),
+          email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
+          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória"),
         });
         await schema.validate(data, {
           abortEarly: false,
@@ -66,7 +66,7 @@ export default function Login({ onChangeForm }: IProps) {
         onSubmit={handleSubmit}
         ref={formRef}
         as={Form}
-        pt={['8']}
+        pt={["8"]}
         maxWidth={512 - 64}
       >
         <Heading fontSize="48" align="center" color="orange.500" pb="24">
@@ -91,7 +91,7 @@ export default function Login({ onChangeForm }: IProps) {
         <Button width="100%" type="submit" size={buttonSize} colorScheme="teal" mt="6">
           Entrar
         </Button>
-        <Text fontSize={['12', '14']} pt="2">
+        <Text fontSize={["12", "14"]} pt="2">
           Ainda não tem uma conta?
           <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
             Cadastre-se!
