@@ -1,4 +1,4 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Flex, Image, Heading } from "@chakra-ui/react";
 import { useWindowSize } from "@hooks/useWindowsSize";
 
 function ImageBackground({ isSmallerDevices, image, alt, }) {
@@ -20,7 +20,7 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
 
 
   return (
-    <Flex flexDirection="row" width="100%" h="100vh">
+    <Flex position="relative" flexDirection="row" width="100%" h="100vh">
       <ImageBackground
         image={`/images/${image}`}
         alt={alt}
@@ -34,7 +34,26 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
         shadow="md"
         backgroundColor="white"
       >
-        {children}
+        <Flex
+          width="100%"
+          height="100vh"
+          direction="column"
+          align="center"
+          padding="8"
+        >
+          <Flex
+            direction="column"
+            justify="center"
+            width="100%"
+            height="100%"
+            maxWidth={448}
+          >
+            <Heading fontSize="48" align="center" color="orange.500" >
+            PeTinder
+            </Heading>
+            {children}
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );

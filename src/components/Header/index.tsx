@@ -45,12 +45,12 @@ export function Header() {
           <Flex
             align="center"
             justify="center"
-            backgroundColor="orange"
+            backgroundColor="white"
             borderRadius="24px"
             p={["4px 8px", "4px 5px",]}
           >
-            <Icon color="white" fontSize="20" m="1" as={RiMenuLine} />
-            <Icon color="white" fontSize="20" m="1" as={RiUser3Fill} />
+            <Icon color="orange.500" fontSize="20" m="1" as={RiMenuLine} />
+            <Icon color="orange.500" fontSize="20" m="1" as={RiUser3Fill} />
           </Flex>
         }
         fontSize="24"

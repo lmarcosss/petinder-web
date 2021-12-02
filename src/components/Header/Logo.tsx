@@ -10,7 +10,7 @@ export function Logo() {
 
   return (
     <Flex onClick={onClick} cursor="pointer" w="100%" pb="2">
-      <Text fontSize="30" fontWeight="bold" color="orange.400">
+      <Text fontSize="30" fontWeight="bold" color="white">
         PeTinder
       </Text>
     </Flex>

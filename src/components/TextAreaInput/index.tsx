@@ -2,7 +2,8 @@ import {
   TextareaProps,
   Text,
   FormControl,
-  Textarea
+  Textarea,
+  FormErrorMessage
 } from "@chakra-ui/react";
 import { useField } from "@unform/core";
 import { MutableRefObject, useEffect, useRef } from "react";
@@ -58,6 +59,7 @@ export var TextAreaInput = function ({
         variant="filled"
         focusBorderColor="teal.500"
       />
+      {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
 };

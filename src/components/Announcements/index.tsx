@@ -29,12 +29,12 @@ export function Announcements({ announcements, }: IProps) {
     lg: false,
   });
 
+
   const minSize = isSmallerDevices ? "250px" : "300px";
 
   return (
     <Grid
       width="100%"
-      height="100%"
       padding="4"
       templateColumns={`repeat(auto-fit, minmax(${minSize}, 1fr))`}
       gap="4"

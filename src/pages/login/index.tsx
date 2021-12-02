@@ -49,54 +49,35 @@ export default function Login() {
 
   return (
     <BaseFormScreen image="register.jfif">
-      <Flex
-        width="100%"
-        height="100vh"
-        direction="column"
-        align="center"
-        padding="8"
+      <Form
+        onSubmit={handleSubmit}
+        ref={formRef}
       >
-        <Flex
-          direction="column"
-          justify="center"
-          width="100%"
-          height="100%"
-          maxWidth={448}
-        >
-          <Heading mb="12" fontSize="48" align="center" color="orange.500" >
-            PeTinder
-          </Heading>
-          <Form
-            onSubmit={handleSubmit}
-            ref={formRef}
-          >
-            <TextInput
-              label="E-mail"
-              iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
-              placeholder="seu@email.com.br"
-              name="email"
-            />
+        <TextInput
+          label="E-mail"
+          iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
+          placeholder="seu@email.com.br"
+          name="email"
+        />
 
-            <TextInput
-              iconInput={<Icon as={FiLock} fontSize="20" mt="2" />}
-              label="Senha"
-              placeholder="sua senha"
-              type="password"
-              name="password"
-            />
+        <TextInput
+          iconInput={<Icon as={FiLock} fontSize="20" mt="2" />}
+          label="Senha"
+          placeholder="sua senha"
+          type="password"
+          name="password"
+        />
 
-            <Button width="100%" type="submit" size={buttonSize} colorScheme="orange" mt="6">
+        <Button width="100%" type="submit" size={buttonSize} colorScheme="orange" mt="6">
             Entrar
-            </Button>
-            <Text fontSize={["12", "14",]} pt="2">
+        </Button>
+        <Text fontSize={["12", "14",]} pt="2">
             Ainda não tem uma conta?
-              <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
+          <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
               Cadastre-se!
-              </Link>
-            </Text>
-          </Form>
-        </Flex>
-      </Flex>
+          </Link>
+        </Text>
+      </Form>
     </BaseFormScreen>
   );
 }
