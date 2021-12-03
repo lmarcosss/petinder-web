@@ -5,7 +5,7 @@ import { FiMail } from "react-icons/fi";
 import { useRef } from "react";
 import * as Yup from "yup";
 
-export default function StepTwo() {
+export function StepTwo() {
   const formRef = useRef(null);
 
   async function handleSubmit(data) {

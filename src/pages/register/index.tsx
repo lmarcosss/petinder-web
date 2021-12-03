@@ -1,9 +1,6 @@
-import { BaseFormScreen } from "@components";
+import { BaseFormScreen, StepOne, StepTwo } from "@components";
 import { FormRegisterEnum } from "@enums";
 import { useState } from "react";
-
-import StepOne from "./_step-one";
-import StepTwo from "./_step-two";
 
 function Form({ form, setFormProperties, goToStepTwo,}) {
   if (form === FormRegisterEnum.STEP_ONE) {
@@ -21,7 +18,6 @@ function Form({ form, setFormProperties, goToStepTwo,}) {
 export default function Register() {
   const [form, setForm,] = useState(FormRegisterEnum.STEP_ONE);
   const [formProperties, setFormProperties,] = useState();
-
 
   function goToStepTwo() {
     setForm(FormRegisterEnum.STEP_TWO);

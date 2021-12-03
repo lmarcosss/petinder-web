@@ -6,7 +6,7 @@ import { FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 
-export default function StepOne({ goToStepTwo, onChangeFormProperties, }) {
+export function StepOne({ goToStepTwo, onChangeFormProperties, }) {
   const route = useRouter();
   const formRef = useRef(null);
   
