@@ -3,7 +3,13 @@ import { useWindowSize } from "@hooks/useWindowsSize";
 import { ReactNode } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 
-function ImageBackground({ isSmallerDevices, image, alt, }) {
+interface IBackgroundProps {
+  isSmallerDevices: boolean;
+  image: string;
+  alt: string;
+}
+
+function ImageBackground({ isSmallerDevices, image, alt, }: IBackgroundProps) {
   if (isSmallerDevices) return null;
 
   return (

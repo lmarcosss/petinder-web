@@ -29,7 +29,6 @@ export default function Register() {
 
   const goBack = form === FormRegisterEnum.STEP_TWO ? goToStepOne : null;
 
-
   return (
     <BaseFormScreen goBack={goBack}>
       <Form

@@ -15,8 +15,6 @@ export default function Login() {
     lg: false,
   });
 
-  const buttonSize = isSmallerDevices ? "lg" : "lg";
-
   function handleChangeForm() {
     route.push("/register");
   }
@@ -66,7 +64,7 @@ export default function Login() {
           placeholder="sua senha"
         />
 
-        <Button width="100%" type="submit" size={buttonSize} colorScheme="orange" mt="6">
+        <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
             Entrar
         </Button>
         <Text fontSize={["12", "14",]} pt="2">

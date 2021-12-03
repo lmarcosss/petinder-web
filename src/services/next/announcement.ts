@@ -1,4 +1,4 @@
-import api from "../petinder/petinder-api";
+import api from "./api";
 
 export function getAnnouncements() {
   return api.get("announcement");

@@ -1,5 +1,5 @@
 import { AnnouncementStatusEnum } from "enums";
-import api from "./petinder-api";
+import api from "./api";
 
 export function getOpennedAnnouncements() {
   return api.get("announcement", {
