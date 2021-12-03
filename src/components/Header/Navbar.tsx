@@ -19,32 +19,32 @@ const MENU_ITEMS = [
   {
     title: MenuEnum.REGISTER_OR_LOGIN,
     href: "/login",
-    icon: FiUser,
+    icon: FiUser
   },
   {
     title: MenuEnum.PROFILE,
     href: "/my-profile",
     needAuth: true,
-    icon: FiUser,
+    icon: FiUser
   },
   {
     title: MenuEnum.REQUESTS,
     href: "/my-requests",
     needAuth: true,
-    icon: FiUser,
+    icon: FiUser
   },
   {
     title: MenuEnum.ANNOUNCEMENTS,
     href: "/my-announcements",
     needAuth: true,
-    icon: FiUser,
+    icon: FiUser
   },
   {
     title: MenuEnum.CREATE_ANNOUNCEMENT,
     href: "/create-announcement",
     needAuth: true,
-    icon: FiUser,
-  },
+    icon: FiUser
+  }
 ];
 
 interface IOnclick {
@@ -53,11 +53,11 @@ interface IOnclick {
 }
 
 export function Navbar() {
-  const { isOpen, onClose, } = useSidebarDrawer();
+  const { isOpen, onClose } = useSidebarDrawer();
 
   const router = useRouter();
 
-  function onClick({ href, }: IOnclick) {
+  function onClick({ href }: IOnclick) {
     onClose();
     setTimeout(() => router.push(href), 200);
   }

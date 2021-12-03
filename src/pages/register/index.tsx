@@ -2,7 +2,13 @@ import { BaseFormScreen, StepOne, StepTwo } from "@components";
 import { FormRegisterEnum } from "@enums";
 import { useState } from "react";
 
-function Form({ form, setFormProperties, goToStepTwo,}) {
+interface IFormProps {
+  form: FormRegisterEnum;
+  setFormProperties(values: unknown): void;
+  goToStepTwo(): void;
+  formProperties: unknown;
+}
+function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormProps) {
   if (form === FormRegisterEnum.STEP_ONE) {
     return (
       <StepOne
@@ -12,12 +18,12 @@ function Form({ form, setFormProperties, goToStepTwo,}) {
     );
   }
 
-  return <StepTwo />;
+  return <StepTwo formProperties={formProperties} />;
 }
 
 export default function Register() {
-  const [form, setForm,] = useState(FormRegisterEnum.STEP_ONE);
-  const [formProperties, setFormProperties,] = useState();
+  const [form, setForm] = useState(FormRegisterEnum.STEP_ONE);
+  const [formProperties, setFormProperties] = useState();
 
   function goToStepTwo() {
     setForm(FormRegisterEnum.STEP_TWO);
@@ -35,6 +41,7 @@ export default function Register() {
         form={form}
         goToStepTwo={goToStepTwo}
         setFormProperties={setFormProperties}
+        formProperties={formProperties}
       />
     </BaseFormScreen>
   );

@@ -11,9 +11,9 @@ import { Logo } from "./Logo";
 const PAGE_TOP = 0;
 
 export function Header() {
-  const [prevScroll, setPrevScroll,] = useState(0);
-  const { onOpen, } = useSidebarDrawer();
-  const [isVisible, setVisible,] = useState(true);
+  const [prevScroll, setPrevScroll] = useState(0);
+  const { onOpen } = useSidebarDrawer();
+  const [isVisible, setVisible] = useState(true);
 
   function handleScroll() {
     const currentScroll = window.pageYOffset;
@@ -29,7 +29,7 @@ export function Header() {
     <Flex
       as="header"
       w="100%"
-      h={["16", "20",]}
+      h={["16", "20"]}
       transition="top 0.5s"
       top={isVisible ? "0" : "-80px"}
       zIndex="99"
@@ -47,7 +47,7 @@ export function Header() {
             justify="center"
             backgroundColor="white"
             borderRadius="24px"
-            p={["4px 8px", "4px 5px",]}
+            p={["4px 8px", "4px 5px"]}
           >
             <Icon color="orange.500" fontSize="20" m="1" as={RiMenuLine} />
             <Icon color="orange.500" fontSize="20" m="1" as={RiUser3Fill} />

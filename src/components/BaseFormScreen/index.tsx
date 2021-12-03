@@ -9,7 +9,7 @@ interface IBackgroundProps {
   alt: string;
 }
 
-function ImageBackground({ isSmallerDevices, image, alt, }: IBackgroundProps) {
+function ImageBackground({ isSmallerDevices, image, alt }: IBackgroundProps) {
   if (isSmallerDevices) return null;
 
   return (
@@ -29,7 +29,7 @@ interface IProps {
   goBack?: () => void;
 }
 
-export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem de pets", goBack, }: IProps) {
+export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem de pets", goBack }: IProps) {
   const windowSize = useWindowSize();
   const isSmallerDevices = windowSize.width > 1669;
 
@@ -73,7 +73,7 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
                   onClick={goBack}
                 />
               )}
-              <Heading fontSize={["30","48",]} align="center" color="orange.500" >
+              <Heading fontSize={["30","48"]} align="center" color="orange.500" >
                  PeTinder
               </Heading>
               {goBack && (

@@ -1,11 +1,16 @@
 import { Box, Image } from "@chakra-ui/react";
-import { AnnouncementStatusEnum } from "enums";
+import { IAnnouncement } from "@types";
+import { AnnouncementStatusEnum } from "@enums";
 
 const cursor = {
-  [AnnouncementStatusEnum.ABERTO]: "pointer",
+  [AnnouncementStatusEnum.ABERTO]: "pointer"
 };
 
-export function Announcement({ data, }) {
+interface IProps {
+  data: IAnnouncement;
+}
+
+export function Announcement({ data }: IProps) {
   return (
     <Box
       cursor={cursor[data.status]}
@@ -14,7 +19,7 @@ export function Announcement({ data, }) {
       borderRadius="lg"
       overflow="hidden"
     >
-      <Image src={data.pictures[0].url} alt={data.name} />
+      <Image src={data.pictures[0].url} alt={String(data.id)} />
 
       <Box p="6">
         <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>

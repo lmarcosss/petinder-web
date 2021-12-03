@@ -12,17 +12,16 @@ interface IProps extends TextareaProps {
   labelColor?: string;
   label: string;
   name: string;
-  iconInput?: any;
 }
   
 export var TextAreaInput = function ({
   labelColor,
   label,
   placeholder,
-  name,
+  name
 }: IProps) {
   const inputRef = useRef();
-  const { fieldName, registerField, error, } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -42,12 +41,12 @@ export var TextAreaInput = function ({
       ref: inputRef,
       getValue,
       setValue,
-      clearValue,
+      clearValue
     });
-  }, [fieldName, registerField,]);
+  }, [fieldName, registerField]);
   
   return (
-    <FormControl isInvalid={!!error} pt={["4", "2",]}>
+    <FormControl isInvalid={!!error} pt={["4", "2"]}>
       <Text fontWeight="500" color={labelColor} mb="2">
         {label}
       </Text>

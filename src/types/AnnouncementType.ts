@@ -13,4 +13,5 @@ export interface IAnnouncement {
   pictures: IPicture[];
   owner: IUser;
   closed: boolean;
+  location: string;
 }

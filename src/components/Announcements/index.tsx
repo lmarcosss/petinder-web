@@ -1,14 +1,15 @@
 import { Grid, Text, useBreakpointValue } from "@chakra-ui/react";
+import { IAnnouncement } from "@types";
 import { Announcement } from "./Announcement";
 
 interface IProps {
-  announcements: any[];
+  announcements: IAnnouncement[];
 }
 
-function List({ items, }) {
-  if (!items.length) {
+function List({ announcements }: IProps) {
+  if (!announcements.length) {
     return (
-      <Text align="center" p="8" fontSize={["14px", "16px",]}>
+      <Text align="center" p="8" fontSize={["14px", "16px"]}>
         Nenhum anúncio encontrado
       </Text>
     );
@@ -16,17 +17,17 @@ function List({ items, }) {
 
   return (
     <>
-      {items.map((data, index) => (
+      {announcements.map((data, index) => (
         <Announcement key={index} data={data} />
       ))}
     </>
   );
 }
 
-export function Announcements({ announcements, }: IProps) {
+export function Announcements({ announcements }: IProps) {
   const isSmallerDevices = useBreakpointValue({
     base: true,
-    lg: false,
+    lg: false
   });
 
 
@@ -40,7 +41,7 @@ export function Announcements({ announcements, }: IProps) {
       gap="4"
       justifyItems="center"
     >
-      <List items={announcements} />
+      <List announcements={announcements} />
     </Grid>
   );
 }

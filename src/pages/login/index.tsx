@@ -1,4 +1,4 @@
-import { Button, Link, Text, useBreakpointValue, Icon } from "@chakra-ui/react";
+import { Button, Link, Text, Icon } from "@chakra-ui/react";
 import { BaseFormScreen, PasswordInput, TextInput } from "@components";
 import { useRef } from "react";
 import { Form } from "@unform/web";
@@ -10,10 +10,6 @@ import { useRouter } from "next/router";
 export default function Login() {
   const route = useRouter();
   const formRef = useRef(null);
-  const isSmallerDevices = useBreakpointValue({
-    base: true,
-    lg: false,
-  });
 
   function handleChangeForm() {
     route.push("/register");
@@ -26,10 +22,10 @@ export default function Login() {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
           email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
-          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória"),
+          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória")
         });
         await schema.validate(data, {
-          abortEarly: false,
+          abortEarly: false
         });
         // Validation passed
         console.log(data);
@@ -67,7 +63,7 @@ export default function Login() {
         <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
             Entrar
         </Button>
-        <Text fontSize={["12", "14",]} pt="2">
+        <Text fontSize={["12", "14"]} pt="2">
             Ainda não tem uma conta?
           <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
               Cadastre-se!

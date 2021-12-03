@@ -1,5 +1,11 @@
 import { AnnouncementStatusEnum } from "./AnnouncementEnum";
 import { MenuEnum } from "./MenuEnum";
-import { FormLoginEnum, FormRegisterEnum } from "./FormEnum";
+import { FormLoginEnum, FormRegisterEnum, FormUserRegisterEnum } from "./FormEnum";
 
-export { AnnouncementStatusEnum, MenuEnum, FormLoginEnum, FormRegisterEnum };
+export {
+  AnnouncementStatusEnum,
+  MenuEnum,
+  FormLoginEnum,
+  FormRegisterEnum,
+  FormUserRegisterEnum
+};

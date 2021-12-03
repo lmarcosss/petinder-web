@@ -36,7 +36,7 @@ export function TextInput ({
   ...otherInputProps
 }: IProps) {
   const inputRef = useRef<HTMLInputElement>();
-  const { fieldName, registerField, error, } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -56,14 +56,14 @@ export function TextInput ({
       ref: inputRef,
       getValue,
       setValue,
-      clearValue,
+      clearValue
     });
-  }, [fieldName, registerField,]);
+  }, [fieldName, registerField]);
 
   const ComponentInput = mask ? ReactInputMask : Input;
 
   return (
-    <FormControl isInvalid={!!error} pt={["4", "2",]}>
+    <FormControl isInvalid={!!error} pt={["4", "2"]}>
       <Text fontWeight="500" color={labelColor} mb="2">
         {label}
       </Text>
@@ -91,4 +91,4 @@ export function TextInput ({
       {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
-};
+}

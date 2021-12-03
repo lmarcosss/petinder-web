@@ -11,13 +11,14 @@ interface IProps {
 
 type IContextData = UseDisclosureReturn;
 
-export function SidebarDrawerProvider({ children, }: IProps) {
+export function SidebarDrawerProvider({ children }: IProps) {
   const disclosure = useDisclosure();
   const router = useRouter();
 
   useEffect(() => {
     disclosure.onClose();
-  }, [router.asPath,]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.asPath]);
 
   return (
     <SidebarDrawerContext.Provider value={disclosure}>{children}</SidebarDrawerContext.Provider>

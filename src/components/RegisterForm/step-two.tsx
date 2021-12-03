@@ -5,7 +5,11 @@ import { FiMail } from "react-icons/fi";
 import { useRef } from "react";
 import * as Yup from "yup";
 
-export function StepTwo() {
+interface IProps {
+  formProperties: unknown;
+}
+
+export function StepTwo({ formProperties }: IProps) {
   const formRef = useRef(null);
 
   async function handleSubmit(data) {
@@ -16,13 +20,13 @@ export function StepTwo() {
           email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
           password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória"),
           confirmPassword: Yup.string().oneOf([
-            Yup.ref("password"), null,
+            Yup.ref("password"), null
           ], "Senhas devem ser iguais").required("Confirmação de senha é obrigatória"),
-          description: Yup.string().required("Descrição é obrigatória"),
+          description: Yup.string().required("Descrição é obrigatória")
         });
     
         await schema.validate(data, {
-          abortEarly: false,
+          abortEarly: false
         });
     
         console.log(data);

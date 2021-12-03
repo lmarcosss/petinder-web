@@ -6,7 +6,12 @@ import { FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 
-export function StepOne({ goToStepTwo, onChangeFormProperties, }) {
+interface IProps {
+  goToStepTwo(): void;
+  onChangeFormProperties(data: unknown): void;
+}
+
+export function StepOne({ goToStepTwo, onChangeFormProperties }: IProps) {
   const route = useRouter();
   const formRef = useRef(null);
   
@@ -22,11 +27,11 @@ export function StepOne({ goToStepTwo, onChangeFormProperties, }) {
           cpf: Yup.string().required("CPF é obrigatório"),
           nome: Yup.string().required("Nome é obrigatório"),
           phone: Yup.string().required("Celular é obrigatório"),
-          birthDay: Yup.date().required("Data de nascimento é obrigatória"),
+          birthDay: Yup.date().required("Data de nascimento é obrigatória")
         });
 
         await schema.validate(data, {
-          abortEarly: false,
+          abortEarly: false
         });
 
         goToStepTwo();
@@ -83,7 +88,7 @@ export function StepOne({ goToStepTwo, onChangeFormProperties, }) {
       <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
           Avançar
       </Button>
-      <Text fontSize={["12", "14",]} pt="2">
+      <Text fontSize={["12", "14"]} pt="2">
         Já tem uma conta?
         <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
           Logue-se!

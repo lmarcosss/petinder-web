@@ -9,7 +9,7 @@ interface IProps {
   announcements: IAnnouncement[];
 }
 
-export default function Home({ announcements, }: IProps) {
+export default function Home({ announcements }: IProps) {
   return (
     <Box>
       <Header />
@@ -19,12 +19,12 @@ export default function Home({ announcements, }: IProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: announcements, } = await getAnnouncements();
+  const { data: announcements } = await getAnnouncements();
 
   return {
     props: {
-      announcements,
+      announcements
     },
-    revalidate: 60 * 60 * 24, // 24 hours
+    revalidate: 60 * 60 * 24 // 24 hours
   };
 };
