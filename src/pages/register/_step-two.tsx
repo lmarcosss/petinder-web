@@ -1,11 +1,11 @@
 import { Icon, Button } from "@chakra-ui/react"; 
 import { Form } from "@unform/web";
-import { TextAreaInput, TextInput } from "@components";
-import { FiLock, FiMail, FiArrowLeft } from "react-icons/fi";
+import { PasswordInput, TextAreaInput, TextInput } from "@components";
+import { FiMail } from "react-icons/fi";
 import { useRef } from "react";
 import * as Yup from "yup";
 
-export default function StepTwo({ onChangeForm, }) {
+export default function StepTwo() {
   const formRef = useRef(null);
 
   async function handleSubmit(data) {
@@ -13,10 +13,12 @@ export default function StepTwo({ onChangeForm, }) {
       if (formRef?.current) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
-          name: Yup.string().required("Nome é obrigatório"),
+          email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
+          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória"),
+          confirmPassword: Yup.string().oneOf([
+            Yup.ref("password"), null,
+          ], "Senhas devem ser iguais").required("Confirmação de senha é obrigatória"),
           description: Yup.string().required("Descrição é obrigatória"),
-          phone: Yup.string().required("Celular é obrigatório"),
-          birthDay: Yup.string().required("Data de nascimento é obrigatória"),
         });
     
         await schema.validate(data, {
@@ -37,50 +39,44 @@ export default function StepTwo({ onChangeForm, }) {
   }
 
   return (
-    <>
-      <Icon
-        position="absolute"
-        fontSize="25"
-        top="150"
-        aria-label="Voltar"
-        as={FiArrowLeft}
-        cursor="pointer"
-        onClick={onChangeForm}
+    <Form
+      ref={formRef}
+      onSubmit={handleSubmit}
+    >
+      <TextInput
+        label="E-mail"
+        iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
+        placeholder="seu@email.com.br"
+        name="email"
       />
-      <Form
-        ref={formRef}
-        onSubmit={handleSubmit}
+
+      <PasswordInput
+        label="Senha"
+        name="password"
+        placeholder="sua senha"
+      />
+
+      <PasswordInput
+        label="Confirmação de senha"
+        placeholder="confirmação de sua senha"
+        name="confirmPassword"
+      />
+
+      <TextAreaInput
+        label="Descrição"
+        placeholder="Sua descrição"
+        name="description"
+      />
+
+      <Button
+        width="100%"
+        type="submit" 
+        size="lg"
+        colorScheme="orange" 
+        mt="6"
       >
-        <TextInput
-          label="E-mail"
-          iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
-          placeholder="seu@email.com.br"
-          name="email"
-        />
-
-        <TextInput
-          iconInput={<Icon as={FiLock} fontSize="20" mt="2" />}
-          label="Senha"
-          placeholder="sua senha"
-          type="password"
-          name="password"
-        />
-
-        <TextInput
-          iconInput={<Icon as={FiLock} fontSize="20" mt="2" />}
-          label="Confirmação de senha"
-          placeholder="confirmação de sua senha"
-          type="password"
-          name="password"
-        />
-
-        <TextAreaInput label="Descrição" placeholder="Sua descrição" name="description" />
-
-
-        <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
-          Salvar
-        </Button>
-      </Form>
-    </>
+        Salvar
+      </Button>
+    </Form>
   );
 }

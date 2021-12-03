@@ -5,17 +5,17 @@ import { useState } from "react";
 import StepOne from "./_step-one";
 import StepTwo from "./_step-two";
 
-function Form({ form, setFormProperties, changeToStepOne, changeToStepTwo,}) {
+function Form({ form, setFormProperties, goToStepTwo,}) {
   if (form === FormRegisterEnum.STEP_ONE) {
     return (
       <StepOne
         onChangeFormProperties={setFormProperties}
-        onChangeForm={changeToStepTwo}
+        goToStepTwo={goToStepTwo}
       />
     );
   }
 
-  return <StepTwo onChangeForm={changeToStepOne} />;
+  return <StepTwo />;
 }
 
 export default function Register() {
@@ -23,21 +23,22 @@ export default function Register() {
   const [formProperties, setFormProperties,] = useState();
 
 
-  function changeToStepTwo() {
+  function goToStepTwo() {
     setForm(FormRegisterEnum.STEP_TWO);
   }
 
-  function changeToStepOne() {
+  function goToStepOne() {
     setForm(FormRegisterEnum.STEP_ONE);
   }
 
+  const goBack = form === FormRegisterEnum.STEP_TWO ? goToStepOne : null;
+
 
   return (
-    <BaseFormScreen>
+    <BaseFormScreen goBack={goBack}>
       <Form
         form={form}
-        changeToStepOne={changeToStepOne}
-        changeToStepTwo={changeToStepTwo}
+        goToStepTwo={goToStepTwo}
         setFormProperties={setFormProperties}
       />
     </BaseFormScreen>

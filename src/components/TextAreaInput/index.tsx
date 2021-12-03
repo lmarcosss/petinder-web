@@ -8,12 +8,12 @@ import {
 import { useField } from "@unform/core";
 import { MutableRefObject, useEffect, useRef } from "react";
   
-  interface IProps extends TextareaProps {
-    labelColor?: string;
-    label: string;
-    name: string;
-    iconInput?: any;
-  }
+interface IProps extends TextareaProps {
+  labelColor?: string;
+  label: string;
+  name: string;
+  iconInput?: any;
+}
   
 export var TextAreaInput = function ({
   labelColor,

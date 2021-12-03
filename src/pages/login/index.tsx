@@ -1,8 +1,8 @@
-import { Button, Flex, Heading, Link, Text, useBreakpointValue, Icon } from "@chakra-ui/react";
-import { BaseFormScreen, TextInput } from "@components";
+import { Button, Link, Text, useBreakpointValue, Icon } from "@chakra-ui/react";
+import { BaseFormScreen, PasswordInput, TextInput } from "@components";
 import { useRef } from "react";
 import { Form } from "@unform/web";
-import { FiLock, FiMail } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 
@@ -60,12 +60,10 @@ export default function Login() {
           name="email"
         />
 
-        <TextInput
-          iconInput={<Icon as={FiLock} fontSize="20" mt="2" />}
+        <PasswordInput
           label="Senha"
-          placeholder="sua senha"
-          type="password"
           name="password"
+          placeholder="sua senha"
         />
 
         <Button width="100%" type="submit" size={buttonSize} colorScheme="orange" mt="6">

@@ -1,5 +1,7 @@
-import { Flex, Image, Heading } from "@chakra-ui/react";
+import { Flex, Image, Heading, Icon } from "@chakra-ui/react";
 import { useWindowSize } from "@hooks/useWindowsSize";
+import { ReactNode } from "react";
+import { FiArrowLeft } from "react-icons/fi";
 
 function ImageBackground({ isSmallerDevices, image, alt, }) {
   if (isSmallerDevices) return null;
@@ -14,7 +16,14 @@ function ImageBackground({ isSmallerDevices, image, alt, }) {
   );
 }
 
-export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem de pets", }) {
+interface IProps {
+  children: ReactNode;
+  image?: string;
+  alt?: string;
+  goBack?: () => void;
+}
+
+export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem de pets", goBack, }: IProps) {
   const windowSize = useWindowSize();
   const isSmallerDevices = windowSize.width > 1669;
 
@@ -48,9 +57,28 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
             height="100%"
             maxWidth={448}
           >
-            <Heading fontSize="48" align="center" color="orange.500" >
-            PeTinder
-            </Heading>
+            <Flex align="center" justify={goBack ? "space-between" : "center"}>
+              {goBack && (
+                <Icon
+                  fontSize="27"
+                  aria-label="Voltar"
+                  as={FiArrowLeft}
+                  cursor="pointer"
+                  onClick={goBack}
+                />
+              )}
+              <Heading fontSize={["30","48",]} align="center" color="orange.500" >
+                 PeTinder
+              </Heading>
+              {goBack && (
+                <Icon
+                  fontSize="27"
+                  aria-label="Voltar"
+                  as={FiArrowLeft}
+                  color="white"
+                />
+              )}
+            </Flex>
             {children}
           </Flex>
         </Flex>

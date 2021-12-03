@@ -6,7 +6,7 @@ import { FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 
-export default function StepOne({ onChangeForm, onChangeFormProperties, }) {
+export default function StepOne({ goToStepTwo, onChangeFormProperties, }) {
   const route = useRouter();
   const formRef = useRef(null);
   
@@ -19,17 +19,17 @@ export default function StepOne({ onChangeForm, onChangeFormProperties, }) {
       if (formRef?.current) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
-          name: Yup.string().required("Nome é obrigatório"),
           cpf: Yup.string().required("CPF é obrigatório"),
+          nome: Yup.string().required("Nome é obrigatório"),
           phone: Yup.string().required("Celular é obrigatório"),
-          birthDay: Yup.string().required("Data de nascimento é obrigatória"),
+          birthDay: Yup.date().required("Data de nascimento é obrigatória"),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        onChangeForm();
+        goToStepTwo();
         onChangeFormProperties(data);
       }
     } catch (err) {
@@ -52,13 +52,14 @@ export default function StepOne({ onChangeForm, onChangeFormProperties, }) {
         label="Nome"
         iconInput={<Icon as={FiUser} fontSize="20" mt="2" />}
         placeholder="Seu nome"
-        name="name"
+        name="nome"
       />
 
       <TextInput
         label="CPF"
         iconInput={<Icon as={FiUser} fontSize="20" mt="2" />}
-        placeholder="000.000.000-00"
+        placeholder="999.999.999-99"
+        mask="999.999.999-99"
         name="cpf"
       />
 
@@ -66,13 +67,16 @@ export default function StepOne({ onChangeForm, onChangeFormProperties, }) {
         label="Celular"
         iconInput={<Icon as={FiPhone} fontSize="20" mt="2" />}
         placeholder="(99) 9 9999-9999"
+        mask="(99) 9 9999-9999"
         name="phone"
+        type="tel"
       />
 
       <TextInput
         label="Data de nascimento"
         iconInput={<Icon as={FiCalendar} fontSize="20" mt="2" />}
         placeholder="dd/mm/aaaa"
+        mask="99/99/9999"
         name="birthDay"
       />
 
@@ -80,9 +84,9 @@ export default function StepOne({ onChangeForm, onChangeFormProperties, }) {
           Avançar
       </Button>
       <Text fontSize={["12", "14",]} pt="2">
-          Já tem uma conta?
+        Já tem uma conta?
         <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
-            Logue-se!
+          Logue-se!
         </Link>
       </Text>
     </Form>

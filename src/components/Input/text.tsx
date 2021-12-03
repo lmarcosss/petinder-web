@@ -1,32 +1,38 @@
 import {
-  Box,
   Input,
-  InputProps,
   Text,
   FormControl,
   FormErrorMessage,
   InputGroup,
-  InputLeftElement
+  InputLeftElement,
+  InputRightElement,
+  ComponentWithAs
 } from "@chakra-ui/react";
 import { useField } from "@unform/core";
-import { MutableRefObject, useEffect, useRef } from "react";
+import React, { MutableRefObject, ReactNode, useEffect, useRef } from "react";
+import ReactInputMask, { Props as InputProps } from "react-input-mask";
 
 interface IProps extends InputProps {
   labelColor?: string;
+  placeholder?: string;
+  type?: string;
   label: string;
   name: string;
-  iconInput?: any;
+  iconInput?: ReactNode;
+  RightElement?: ComponentWithAs<"div">;
+  ComponentInput?: ComponentWithAs<"div">;
+  mask?: string;
 }
 
-export var TextInput = function ({
+export function TextInput ({
   labelColor,
   label,
-  value,
   type,
-  onChange,
   placeholder,
   name,
   iconInput,
+  RightElement,
+  mask,
   ...otherInputProps
 }: IProps) {
   const inputRef = useRef<HTMLInputElement>();
@@ -54,6 +60,8 @@ export var TextInput = function ({
     });
   }, [fieldName, registerField,]);
 
+  const ComponentInput = mask ? ReactInputMask : Input;
+
   return (
     <FormControl isInvalid={!!error} pt={["4", "2",]}>
       <Text fontWeight="500" color={labelColor} mb="2">
@@ -62,6 +70,7 @@ export var TextInput = function ({
       <InputGroup>
         <InputLeftElement pointerEvents="none">{iconInput}</InputLeftElement>
         <Input
+          as={ComponentInput}
           isInvalid={!!error}
           ref={inputRef}
           name={name}
@@ -70,9 +79,14 @@ export var TextInput = function ({
           size="lg"
           variant="filled"
           focusBorderColor="teal.500"
-          
+          mask={mask}
           {...otherInputProps}
         />
+        {RightElement && (
+          <InputRightElement width='4.5rem'>
+            <RightElement />
+          </InputRightElement>
+        )}
       </InputGroup>
       {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
