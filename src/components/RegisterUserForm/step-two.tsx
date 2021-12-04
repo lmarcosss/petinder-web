@@ -9,7 +9,7 @@ interface IProps {
   formProperties: unknown;
 }
 
-export function StepTwo({ formProperties }: IProps) {
+export function StepTwoUser({ formProperties }: IProps) {
   const formRef = useRef(null);
 
   async function handleSubmit(data) {

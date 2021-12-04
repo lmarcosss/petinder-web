@@ -9,9 +9,15 @@ import { useRouter } from "next/router";
 interface IProps {
   goToStepTwo(): void;
   onChangeFormProperties(data: unknown): void;
+  formProperties: {
+    name?: string;
+    cpf?: string;
+    phone?: string;
+    birthDay?: string;
+  };
 }
 
-export function StepOne({ goToStepTwo, onChangeFormProperties }: IProps) {
+export function StepOneUser({ goToStepTwo, onChangeFormProperties, formProperties }: IProps) {
   const route = useRouter();
   const formRef = useRef(null);
   
@@ -25,7 +31,7 @@ export function StepOne({ goToStepTwo, onChangeFormProperties }: IProps) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
           cpf: Yup.string().required("CPF é obrigatório"),
-          nome: Yup.string().required("Nome é obrigatório"),
+          name: Yup.string().required("Nome é obrigatório"),
           phone: Yup.string().required("Celular é obrigatório"),
           birthDay: Yup.date().required("Data de nascimento é obrigatória")
         });
@@ -52,12 +58,18 @@ export function StepOne({ goToStepTwo, onChangeFormProperties }: IProps) {
     <Form
       ref={formRef}
       onSubmit={handleSubmit}
+      initialData={{
+        name: formProperties?.name || "",
+        cpf: formProperties?.cpf || "",
+        phone: formProperties?.phone || "",
+        birthDay: formProperties?.birthDay || ""
+      }}
     >
       <TextInput
         label="Nome"
         iconInput={<Icon as={FiUser} fontSize="20" mt="2" />}
         placeholder="Seu nome"
-        name="nome"
+        name="name"
       />
 
       <TextInput

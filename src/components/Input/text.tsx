@@ -36,7 +36,7 @@ export function TextInput ({
   ...otherInputProps
 }: IProps) {
   const inputRef = useRef<HTMLInputElement>();
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
 
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -70,6 +70,7 @@ export function TextInput ({
       <InputGroup>
         <InputLeftElement pointerEvents="none">{iconInput}</InputLeftElement>
         <Input
+          defaultValue={defaultValue}
           as={ComponentInput}
           isInvalid={!!error}
           ref={inputRef}
