@@ -4,9 +4,10 @@ import { PasswordInput, TextAreaInput, TextInput } from "@components";
 import { FiMail } from "react-icons/fi";
 import { useRef } from "react";
 import * as Yup from "yup";
+import { IUserFormProperties } from "types/UserType";
 
 interface IProps {
-  formProperties: unknown;
+  formProperties: IUserFormProperties;
 }
 
 export function StepTwoUser({ formProperties }: IProps) {

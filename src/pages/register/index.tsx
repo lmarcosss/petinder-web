@@ -1,12 +1,13 @@
 import { BaseFormScreen, StepOneUser, StepTwoUser } from "@components";
 import { FormRegisterEnum } from "@enums";
 import { useEffect, useState } from "react";
+import { IUserFormProperties } from "types/UserType";
 
 interface IFormProps {
   form: FormRegisterEnum;
-  setFormProperties(values: unknown): void;
+  setFormProperties(values: IUserFormProperties): void;
   goToStepTwo(): void;
-  formProperties: unknown;
+  formProperties: IUserFormProperties;
 }
 function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormProps) {
   if (form === FormRegisterEnum.STEP_ONE) {
@@ -24,7 +25,7 @@ function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormPro
 
 export default function Register() {
   const [form, setForm] = useState(FormRegisterEnum.STEP_ONE);
-  const [formProperties, setFormProperties] = useState();
+  const [formProperties, setFormProperties] = useState<IUserFormProperties>();
 
   useEffect(() => {
     console.log(formProperties);

@@ -5,16 +5,12 @@ import { useRef } from "react";
 import { FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
+import { IUserStepOne } from "types/UserType";
 
 interface IProps {
   goToStepTwo(): void;
-  onChangeFormProperties(data: unknown): void;
-  formProperties: {
-    name?: string;
-    cpf?: string;
-    phone?: string;
-    birthDay?: string;
-  };
+  onChangeFormProperties(data: IUserStepOne): void;
+  formProperties: IUserStepOne;
 }
 
 export function StepOneUser({ goToStepTwo, onChangeFormProperties, formProperties }: IProps) {
