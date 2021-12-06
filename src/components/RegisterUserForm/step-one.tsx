@@ -54,16 +54,18 @@ export function StepOneUser({ goToStepTwo, onChangeFormProperties, formPropertie
     }
   }
 
+  const initialData = formProperties ? {
+    name: formProperties?.name,
+    cpf: formProperties?.cpf,
+    phone: formProperties?.phone,
+    birthDay: formProperties?.birthDay
+  } : null;
+
   return (
     <Form
       ref={formRef}
       onSubmit={handleSubmit}
-      initialData={{
-        name: formProperties?.name || "",
-        cpf: formProperties?.cpf || "",
-        phone: formProperties?.phone || "",
-        birthDay: formProperties?.birthDay || ""
-      }}
+      initialData={initialData}
     >
       <TextInput
         label="Nome"

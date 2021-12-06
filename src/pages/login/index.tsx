@@ -6,7 +6,6 @@ import { FiMail } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 
-
 export default function Login() {
   const route = useRouter();
   const formRef = useRef(null);
