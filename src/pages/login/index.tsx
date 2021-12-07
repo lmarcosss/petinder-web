@@ -40,8 +40,12 @@ export default function Login() {
     }
   }
 
+  function goBack() {
+    route.replace("/");
+  }
+
   return (
-    <BaseFormScreen image="register.jfif">
+    <BaseFormScreen goBack={goBack} image="register.jfif">
       <Form
         onSubmit={handleSubmit}
         ref={formRef}

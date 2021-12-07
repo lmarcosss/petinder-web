@@ -1,5 +1,6 @@
 import { BaseFormScreen, StepOneUser, StepTwoUser } from "@components";
 import { FormRegisterEnum } from "@enums";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IUserFormProperties } from "types/UserType";
 
@@ -26,6 +27,7 @@ function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormPro
 export default function Register() {
   const [form, setForm] = useState(FormRegisterEnum.STEP_ONE);
   const [formProperties, setFormProperties] = useState<IUserFormProperties>();
+  const route = useRouter();
 
   useEffect(() => {
     console.log(formProperties);
@@ -39,7 +41,11 @@ export default function Register() {
     setForm(FormRegisterEnum.STEP_ONE);
   }
 
-  const goBack = form === FormRegisterEnum.STEP_TWO ? goToStepOne : null;
+  function goToHome() {
+    route.replace("/");
+  }
+
+  const goBack = form === FormRegisterEnum.STEP_TWO ? goToStepOne : goToHome;
 
   return (
     <BaseFormScreen goBack={goBack}>

@@ -42,7 +42,7 @@ const MENU_ITEMS = [
   {
     title: MenuEnum.CREATE_ANNOUNCEMENT,
     href: "/create-announcement",
-    needAuth: true,
+    // needAuth: true,
     icon: FiUser
   }
 ];
@@ -76,8 +76,8 @@ export function Navbar() {
                 if (item.needAuth) return;
 
                 return (
-                  <Link display="flex" alignItems="center" key={index} onClick={() => onClick(item)} color="white">
-                    <Icon as={item.icon} fontSize="20" mr="2" />
+                  <Link fontWeight="500" display="flex" alignItems="center" key={index} onClick={() => onClick(item)} color="white">
+                    <Icon as={item.icon} fontSize="18" mr="2" />
                     {item.title}
                   </Link>
                 );
