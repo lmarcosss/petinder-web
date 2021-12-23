@@ -46,8 +46,8 @@ export function StepOneCreateAnnouncement({
   }
 
   const initialData = formProperties ? {
-    title: formProperties?.title,
-    description: formProperties?.description
+    // title: formProperties?.title,
+    // description: formProperties?.description
   } : null;
 
   return (
