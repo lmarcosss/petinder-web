@@ -1,4 +1,4 @@
 import { IAnnouncement } from "./AnnouncementType";
-import { IUser } from "./UserType";
+import { IResponseUser } from "./UserType";
 
-export type { IAnnouncement, IUser };
+export type { IAnnouncement, IResponseUser };

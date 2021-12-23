@@ -1,5 +1,5 @@
 import { AnnouncementStatusEnum } from "enums";
-import { IUser } from "./UserType";
+import { IResponseUser } from "./UserType";
 
 export interface IPicture {
   id: number;
@@ -11,7 +11,7 @@ export interface IAnnouncement {
   description: string;
   status: AnnouncementStatusEnum;
   pictures: IPicture[];
-  owner: IUser;
+  owner: IResponseUser;
   closed: boolean;
   location: string;
 }
