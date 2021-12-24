@@ -6,6 +6,8 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerContent,
+  DrawerFooter,
+  Button,
   Stack,
   Link,
   Text,
@@ -13,36 +15,38 @@ import {
 } from "@chakra-ui/react";
 import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
 import { MenuEnum } from "enums";
-import { FiUser } from "react-icons/fi";
+import { FiUser, FiLogOut } from "react-icons/fi";
+import { useToken } from "@hooks/useToken";
 
 const MENU_ITEMS = [
   {
     title: MenuEnum.REGISTER_OR_LOGIN,
     href: "/login",
+    loggedOut: true,
     icon: FiUser
   },
   {
     title: MenuEnum.PROFILE,
     href: "/my-profile",
-    needAuth: true,
+    loggedIn: true,
     icon: FiUser
   },
   {
     title: MenuEnum.REQUESTS,
     href: "/my-requests",
-    needAuth: true,
+    loggedIn: true,
     icon: FiUser
   },
   {
     title: MenuEnum.ANNOUNCEMENTS,
     href: "/my-announcements",
-    needAuth: true,
+    loggedIn: true,
     icon: FiUser
   },
   {
     title: MenuEnum.CREATE_ANNOUNCEMENT,
     href: "/create-announcement",
-    // needAuth: true,
+    loggedIn: true,
     icon: FiUser
   }
 ];
@@ -54,12 +58,19 @@ interface IOnclick {
 
 export function Navbar() {
   const { isOpen, onClose } = useSidebarDrawer();
+  const { hasAuth, clearToken } = useToken();
 
   const router = useRouter();
 
   function onClick({ href }: IOnclick) {
     onClose();
     setTimeout(() => router.push(href), 200);
+  }
+
+  function logout() {
+    onClose();
+    clearToken();
+    setTimeout(() => router.replace("/"), 200);
   }
 
   return (
@@ -73,7 +84,8 @@ export function Navbar() {
           <DrawerBody>
             <Stack display="flex" spacing="8">
               {MENU_ITEMS.map((item, index) => {
-                if (item.needAuth) return;
+                if (item.loggedIn && !hasAuth) return;
+                if (item.loggedOut && hasAuth) return;
 
                 return (
                   <Link fontWeight="500" display="flex" alignItems="center" key={index} onClick={() => onClick(item)} color="white">
@@ -84,6 +96,14 @@ export function Navbar() {
               })}
             </Stack>
           </DrawerBody>
+          {hasAuth && (
+            <DrawerFooter justifyContent="center">
+              <Button variant="solid" mr={3} onClick={logout} color="orange.500">
+                <Icon as={FiLogOut} fontSize="18" mr="2" color="orange.500" />
+                Sair
+              </Button>
+            </DrawerFooter>
+          )}     
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>
