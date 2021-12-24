@@ -1,16 +1,16 @@
-import { Icon, Button } from "@chakra-ui/react"; 
+import { Icon, Button } from "@chakra-ui/react";
 import { Form } from "@unform/web";
 import { PasswordInput, TextAreaInput, TextInput } from "@components";
 import { FiMail } from "react-icons/fi";
 import { useRef } from "react";
 import * as Yup from "yup";
-import { IUserFormProperties } from "types/UserType";
+import { IUserStepTwo } from "types/UserType";
 
 interface IProps {
-  formProperties: IUserFormProperties;
+  onSubmit: (data: IUserStepTwo) => void;
 }
 
-export function StepTwoUser({ formProperties }: IProps) {
+export function StepTwoUser({ onSubmit }: IProps) {
   const formRef = useRef(null);
 
   async function handleSubmit(data) {
@@ -25,12 +25,12 @@ export function StepTwoUser({ formProperties }: IProps) {
           ], "Senhas devem ser iguais").required("Confirmação de senha é obrigatória"),
           description: Yup.string().required("Descrição é obrigatória")
         });
-    
+
         await schema.validate(data, {
           abortEarly: false
         });
-    
-        console.log(data);
+
+        await onSubmit(data);
       }
     } catch (err) {
       const validationErrors = {};
@@ -75,9 +75,9 @@ export function StepTwoUser({ formProperties }: IProps) {
 
       <Button
         width="100%"
-        type="submit" 
+        type="submit"
         size="lg"
-        colorScheme="orange" 
+        colorScheme="orange"
         mt="6"
       >
         Salvar
