@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { doLogin } from "@services/auth/login";
 import { useToken } from "@hooks/useToken";
+import { ErrorsEnum } from "@enums";
 
 export default function Login() {
   const route = useRouter();
@@ -52,7 +53,7 @@ export default function Login() {
       }
 
       toastr({
-        description: err.response.data.message,
+        description: err.response.data.message || ErrorsEnum.UNEXPECTED,
         status: "error",
         position: "top-right",
         isClosable: true
