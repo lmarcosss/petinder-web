@@ -1,13 +1,17 @@
-import { Button, Link, Text, Icon } from "@chakra-ui/react";
+import { Button, Link, Text, Icon, useToast } from "@chakra-ui/react";
 import { BaseFormScreen, PasswordInput, TextInput } from "@components";
 import { useRef } from "react";
 import { Form } from "@unform/web";
 import { FiMail } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
+import { doLogin } from "@services/auth/login";
+import { useToken } from "@hooks/useToken";
 
 export default function Login() {
   const route = useRouter();
+  const toastr = useToast();
+  const { setToken } = useToken();
   const formRef = useRef(null);
 
   function handleChangeForm() {
@@ -26,8 +30,15 @@ export default function Login() {
         await schema.validate(data, {
           abortEarly: false
         });
+
         // Validation passed
-        console.log(data);
+        const {
+          data: { token, tokenType }
+        } = await doLogin(data.email, data.password);
+
+        setToken(tokenType, token);
+
+        route.replace("/");
       }
     } catch (err) {
       const validationErrors = {};
@@ -36,7 +47,16 @@ export default function Login() {
           validationErrors[error.path] = error.message;
         });
         formRef.current.setErrors(validationErrors);
+        
+        return;
       }
+
+      toastr({
+        description: err.response.data.message,
+        status: "error",
+        position: "top-right",
+        isClosable: true
+      });
     }
   }
 
