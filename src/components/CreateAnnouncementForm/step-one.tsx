@@ -1,5 +1,6 @@
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
+import { IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { useRef } from "react";
 import { FiType } from "react-icons/fi";
@@ -8,7 +9,7 @@ import * as Yup from "yup";
 interface IProps {
     goToStepTwo(): void;
     onChangeFormProperties(data: unknown): void;
-    formProperties: unknown;
+    formProperties: IAnnouncementForm;
   }
 
 export function StepOneCreateAnnouncement({

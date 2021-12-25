@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
 import { MenuEnum } from "enums";
-import { FiUser } from "react-icons/fi";
+import { FiFileText, FiUser } from "react-icons/fi";
 
 const MENU_ITEMS = [
   {
@@ -43,7 +43,7 @@ const MENU_ITEMS = [
     title: MenuEnum.CREATE_ANNOUNCEMENT,
     href: "/create-announcement",
     // needAuth: true,
-    icon: FiUser
+    icon: FiFileText
   }
 ];
 
