@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { IUserFormProperties, IUserStepTwo } from "types/UserType";
 import { useToast } from "@chakra-ui/react";
-import { doRegister } from "@services/auth/register";
+import { doRegister } from "@services/auth/user";
 
 interface IFormProps {
   form: FormRegisterEnum;
