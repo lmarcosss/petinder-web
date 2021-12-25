@@ -1,16 +1,26 @@
 import { BaseFormScreen, StepOneUser, StepTwoUser } from "@components";
-import { FormRegisterEnum } from "@enums";
+import { FormRegisterEnum, ErrorsEnum } from "@enums";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { IUserFormProperties } from "types/UserType";
+import { useState } from "react";
+import { IUserFormProperties, IUserStepTwo } from "types/UserType";
+import { useToast } from "@chakra-ui/react";
+import { doRegister } from "@services/auth/user";
 
 interface IFormProps {
   form: FormRegisterEnum;
   setFormProperties(values: IUserFormProperties): void;
   goToStepTwo(): void;
   formProperties: IUserFormProperties;
+  onSubmit: (data: IUserStepTwo) => void;
 }
-function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormProps) {
+
+function Form({
+  form,
+  setFormProperties,
+  goToStepTwo,
+  formProperties,
+  onSubmit
+}: IFormProps) {
   if (form === FormRegisterEnum.STEP_ONE) {
     return (
       <StepOneUser
@@ -21,17 +31,15 @@ function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormPro
     );
   }
 
-  return <StepTwoUser formProperties={formProperties} />;
+  return <StepTwoUser onSubmit={onSubmit} />;
 }
 
 export default function Register() {
   const [form, setForm] = useState(FormRegisterEnum.STEP_ONE);
   const [formProperties, setFormProperties] = useState<IUserFormProperties>();
-  const route = useRouter();
 
-  useEffect(() => {
-    console.log(formProperties);
-  }, [formProperties]);
+  const route = useRouter();
+  const toastr = useToast();
 
   function goToStepTwo() {
     setForm(FormRegisterEnum.STEP_TWO);
@@ -45,6 +53,27 @@ export default function Register() {
     route.replace("/");
   }
 
+  function goToLogin() {
+    route.replace("/login");
+  }
+
+  async function handleSubmit(stepTwoData) {
+    try {
+      const formValues = { ...formProperties, ...stepTwoData };
+
+      await doRegister(formValues);
+
+      goToLogin();
+    } catch (err) {
+      toastr({
+        description: err.response.data.message || ErrorsEnum.UNEXPECTED,
+        status: "error",
+        position: "top-right",
+        isClosable: true
+      });
+    }
+  }
+
   const goBack = form === FormRegisterEnum.STEP_TWO ? goToStepOne : goToHome;
 
   return (
@@ -54,6 +83,7 @@ export default function Register() {
         goToStepTwo={goToStepTwo}
         setFormProperties={setFormProperties}
         formProperties={formProperties}
+        onSubmit={handleSubmit}
       />
     </BaseFormScreen>
   );
