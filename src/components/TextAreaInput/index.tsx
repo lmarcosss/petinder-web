@@ -14,7 +14,7 @@ interface IProps extends TextareaProps {
   name: string;
 }
   
-export var TextAreaInput = function ({
+export function TextAreaInput({
   labelColor,
   label,
   placeholder,
@@ -62,5 +62,5 @@ export var TextAreaInput = function ({
       {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
-};
+}
   
