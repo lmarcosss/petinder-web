@@ -21,7 +21,7 @@ export var TextAreaInput = function ({
   name
 }: IProps) {
   const inputRef = useRef();
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
   
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -51,6 +51,7 @@ export var TextAreaInput = function ({
         {label}
       </Text>
       <Textarea
+        defaultValue={defaultValue}
         isInvalid={!!error}
         ref={inputRef}
         name={name}

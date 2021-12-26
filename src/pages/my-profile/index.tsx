@@ -93,7 +93,6 @@ function MyProfilePage({ userInfo }: IProps) {
           placeholder="Seu nome"
           name="name"
         />
-
         <TextInput
           label="CPF"
           iconInput={<Icon as={FiUser} fontSize="20" mt="2" />}
@@ -101,7 +100,6 @@ function MyProfilePage({ userInfo }: IProps) {
           mask="999.999.999-99"
           name="cpf"
         />
-
         <TextInput
           label="Celular"
           iconInput={<Icon as={FiPhone} fontSize="20" mt="2" />}
@@ -110,7 +108,6 @@ function MyProfilePage({ userInfo }: IProps) {
           name="phone"
           type="tel"
         />
-
         <TextInput
           label="Data de nascimento"
           iconInput={<Icon as={FiCalendar} fontSize="20" mt="2" />}
@@ -124,7 +121,6 @@ function MyProfilePage({ userInfo }: IProps) {
           placeholder="seu@email.com.br"
           name="email"
         />
-
         <TextAreaInput
           label="Descrição"
           placeholder="Sua descrição"
