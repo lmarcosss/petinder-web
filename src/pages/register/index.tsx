@@ -1,5 +1,5 @@
 import { BaseFormScreen, StepOneUser, StepTwoUser } from "@components";
-import { FormRegisterEnum, ErrorsEnum } from "@enums";
+import { FormRegisterEnum, ToastrEnum } from "@enums";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IUserFormProperties, IUserStepTwo } from "types/UserType";
@@ -66,7 +66,7 @@ export default function Register() {
       goToLogin();
     } catch (err) {
       toastr({
-        description: err.response.data.message || ErrorsEnum.UNEXPECTED,
+        description: err.response.data.message || ToastrEnum.UNEXPECTED_ERROR,
         status: "error",
         position: "top-right",
         isClosable: true
