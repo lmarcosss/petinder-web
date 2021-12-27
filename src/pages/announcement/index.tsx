@@ -1,12 +1,13 @@
 import { BaseFormScreen, StepOneCreateAnnouncement, StepTwoCreateAnnouncement } from "@components";
 import { FormRegisterEnum } from "@enums";
+import { IAnnouncementForm } from "@types";
 import { useState } from "react";
 
 interface IFormProps {
     form: FormRegisterEnum;
-    setFormProperties?(values: unknown): void;
+    setFormProperties?(values: IAnnouncementForm): void;
     goToStepTwo(): void;
-    formProperties?: unknown;
+    formProperties?: IAnnouncementForm;
   }
 
 function Form({ form, setFormProperties, goToStepTwo, formProperties }: IFormProps) {

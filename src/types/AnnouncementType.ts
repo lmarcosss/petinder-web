@@ -8,10 +8,22 @@ export interface IPicture {
 
 export interface IAnnouncement {
   id: number;
+  title: string;
   description: string;
   status: AnnouncementStatusEnum;
   pictures: IPicture[];
   owner: IResponseUser;
   closed: boolean;
   location: string;
+}
+
+export interface IAnnouncementForm extends IStepOneAnnouncement, IStepTwoAnnouncement {}
+
+export interface IStepOneAnnouncement {
+  title: string;
+  description: string;
+}
+
+export interface IStepTwoAnnouncement {
+  pictures: IPicture[];
 }

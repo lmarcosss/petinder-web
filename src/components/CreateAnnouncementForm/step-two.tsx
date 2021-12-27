@@ -1,12 +1,13 @@
 import { Button, Icon } from "@chakra-ui/react";
 import { TextInput } from "@components";
+import { IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { useRef } from "react";
 import { FiImage } from "react-icons/fi";
 import * as Yup from "yup";
 
 interface IProps {
-  formProperties: unknown;
+  formProperties: IAnnouncementForm;
 }
 
 export function StepTwoCreateAnnouncement({ formProperties }: IProps) {
