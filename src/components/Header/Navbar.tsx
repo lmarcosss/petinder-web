@@ -17,54 +17,65 @@ import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
 import { MenuEnum } from "enums";
 import { FiFileText, FiUser, FiLogOut } from "react-icons/fi";
 import { useToken } from "@hooks/useToken";
+import { useCreateAnnouncementModal } from "@contexts/createAnnouncementContext";
+import { IconType } from "react-icons";
 
-const MENU_ITEMS = [
-  {
-    title: MenuEnum.REGISTER_OR_LOGIN,
-    href: "/login",
-    loggedOut: true,
-    icon: FiUser
-  },
-  {
-    title: MenuEnum.PROFILE,
-    href: "/my-profile",
-    loggedIn: true,
-    icon: FiUser
-  },
-  {
-    title: MenuEnum.REQUESTS,
-    href: "/my-requests",
-    loggedIn: true,
-    icon: FiUser
-  },
-  {
-    title: MenuEnum.ANNOUNCEMENTS,
-    href: "/my-announcements",
-    loggedIn: true,
-    icon: FiUser
-  },
-  {
-    title: MenuEnum.CREATE_ANNOUNCEMENT,
-    href: "/create-announcement",
-    icon: FiFileText,
-    loggedIn: true
-  }
-];
-
-interface IOnclick {
-  href: string;
-  title: MenuEnum;
+interface IMenuItems {
+  name: MenuEnum;
+  icon: IconType;
+  href?: string;
+  loggedOut?: boolean;
+  loggedIn?: boolean;
+  onAction?: () => void;
 }
 
 export function Navbar() {
   const { isOpen, onClose } = useSidebarDrawer();
   const { hasAuth, clearToken } = useToken();
-
+  const { onOpen } = useCreateAnnouncementModal();
   const router = useRouter();
 
-  function onClick({ href }: IOnclick) {
+  const menuItems = [
+    {
+      name: MenuEnum.REGISTER_OR_LOGIN,
+      href: "/login",
+      loggedOut: true,
+      icon: FiUser
+    },
+    {
+      name: MenuEnum.PROFILE,
+      href: "/my-profile",
+      loggedIn: true,
+      icon: FiUser
+    },
+    {
+      name: MenuEnum.REQUESTS,
+      href: "/my-requests",
+      loggedIn: true,
+      icon: FiUser
+    },
+    {
+      name: MenuEnum.ANNOUNCEMENTS,
+      href: "/my-announcements",
+      loggedIn: true,
+      icon: FiUser
+    },
+    {
+      name: MenuEnum.CREATE_ANNOUNCEMENT,
+      onAction: onOpen,
+      loggedOut: true,
+      icon: FiFileText
+    }
+  ] as IMenuItems[];
+
+  function onClick({ href, onAction }: IMenuItems) {
     onClose();
-    setTimeout(() => router.push(href), 200);
+
+    if (href) {
+      setTimeout(() => router.push(href), 200);
+    } else {
+      onAction();
+    }
   }
 
   function logout() {
@@ -83,14 +94,21 @@ export function Navbar() {
           </DrawerHeader>
           <DrawerBody>
             <Stack display="flex" spacing="8">
-              {MENU_ITEMS.map((item, index) => {
+              {menuItems.map((item, index) => {
                 if (item.loggedIn && !hasAuth) return;
                 if (item.loggedOut && hasAuth) return;
 
                 return (
-                  <Link fontWeight="500" display="flex" alignItems="center" key={index} onClick={() => onClick(item)} color="white">
+                  <Link
+                    fontWeight="500"
+                    display="flex"
+                    alignItems="center"
+                    key={index}
+                    onClick={() => onClick(item)}
+                    color="white"
+                  >
                     <Icon as={item.icon} fontSize="18" mr="2" />
-                    {item.title}
+                    {item.name}
                   </Link>
                 );
               })}
