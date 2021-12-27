@@ -40,10 +40,12 @@ export function StepOneUser({
           abortEarly: false,
         });
 
+        const { cpf, phone, ...restData } = data;
+
         const formattedData = {
-          ...data,
-          cpf: data.cpf.replace(/\D/g, ""),
-          phone: data.phone.replace(/\D/g, ""),
+          ...restData,
+          cpf: cpf.replace(/\D/g, ""),
+          phone: phone.replace(/\D/g, ""),
         };
 
         goToStepTwo();
