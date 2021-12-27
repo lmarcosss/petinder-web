@@ -1,5 +1,11 @@
 import { useRouter } from "next/router";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface IContextProps {
   isVisible: boolean;
@@ -7,13 +13,13 @@ interface IContextProps {
   onOpen: () => void;
 }
 
-const CreateAnnouncementModalContext = createContext({} as IContextProps);
+const AnnouncementModalContext = createContext({} as IContextProps);
 
 interface IProps {
   children: ReactNode;
 }
 
-export function CreateAnnouncementModalProvider({ children }: IProps) {
+export function AnnouncementModalProvider({ children }: IProps) {
   const [isVisible, setVisible] = useState(false);
   const router = useRouter();
 
@@ -27,20 +33,20 @@ export function CreateAnnouncementModalProvider({ children }: IProps) {
 
   useEffect(() => {
     onClose();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath]);
 
   return (
-    <CreateAnnouncementModalContext.Provider
+    <AnnouncementModalContext.Provider
       value={{
         onOpen,
         onClose,
-        isVisible
+        isVisible,
       }}
     >
       {children}
-    </CreateAnnouncementModalContext.Provider>
+    </AnnouncementModalContext.Provider>
   );
 }
 
-export const useCreateAnnouncementModal = () => useContext(CreateAnnouncementModalContext);
+export const useAnnouncementModal = () => useContext(AnnouncementModalContext);

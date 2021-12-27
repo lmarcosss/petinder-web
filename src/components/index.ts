@@ -6,7 +6,5 @@ export { BaseFormScreen } from "./BaseFormScreen";
 export { PasswordInput } from "./Input/password";
 export { StepOneUser } from "./RegisterUserForm/step-one";
 export { StepTwoUser } from "./RegisterUserForm/step-two";
-export { StepOneCreateAnnouncement } from "./AnnouncementModal/step-one";
-export { StepTwoCreateAnnouncement } from "./AnnouncementModal/step-two";
-export { Modal } from "./Modal";
+export { Modal } from "./Modal/";
 export { AnnouncementModal } from "./AnnouncementModal";
