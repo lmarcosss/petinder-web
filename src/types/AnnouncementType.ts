@@ -6,6 +6,13 @@ export interface IPicture {
   url: string;
 }
 
+export interface IAnnouncementEdit {
+  id: number;
+  title: string;
+  description: string;
+  picture: IPicture[];
+}
+
 export interface IAnnouncement {
   id: number;
   title: string;

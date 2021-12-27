@@ -27,11 +27,8 @@
     "semi": [
       "error"
     ],
-    "indent": ["error", 2],
-      "comma-dangle": ["error", {
-        "arrays": "never",
-        "objects": "never"
-    }]
+    "indent": ["error", 2]
+     
   },
   "parserOptions": {
     "ecmaVersion": 6,
