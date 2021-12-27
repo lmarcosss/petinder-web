@@ -90,7 +90,7 @@ export function Navbar() {
     {
       name: MenuEnum.CREATE_ANNOUNCEMENT,
       onAction: goToCreateAnnouncement,
-      loggedOut: true,
+      loggedIn: true,
       icon: FiFilePlus,
     },
   ] as IMenuItems[];
