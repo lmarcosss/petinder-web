@@ -1,6 +1,6 @@
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
-import { useGeolocation } from "@hooks/useGeolocation";
+// import { useGeolocation } from "@hooks/useGeolocation";
 import { IAnnouncementEdit } from "@types";
 import { Form } from "@unform/web";
 import { useRef } from "react";
@@ -13,7 +13,7 @@ interface IProps {
 
 export function CreateAnnouncement({ initialData }: IProps) {
   const formRef = useRef(null);
-  const { position } = useGeolocation();
+  // const { position } = useGeolocation();
 
   async function handleSubmit(data) {
     try {
