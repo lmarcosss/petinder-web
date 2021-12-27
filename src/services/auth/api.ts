@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: process.env.PETINDER_AUTH_API
+  baseURL: process.env.NEXT_PUBLIC_PETINDER_AUTH_API
 });
