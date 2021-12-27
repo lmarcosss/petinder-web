@@ -14,14 +14,14 @@ interface IProps extends TextareaProps {
   name: string;
 }
   
-export var TextAreaInput = function ({
+export function TextAreaInput({
   labelColor,
   label,
   placeholder,
   name
 }: IProps) {
   const inputRef = useRef();
-  const { fieldName, registerField, error } = useField(name);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
   
   function getValue(ref: MutableRefObject<HTMLInputElement>) {
     return ref.current.value;
@@ -51,6 +51,7 @@ export var TextAreaInput = function ({
         {label}
       </Text>
       <Textarea
+        defaultValue={defaultValue}
         isInvalid={!!error}
         ref={inputRef}
         name={name}
@@ -61,5 +62,5 @@ export var TextAreaInput = function ({
       {!!error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
-};
+}
   

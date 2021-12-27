@@ -1,18 +1,25 @@
 import { StorageEnum } from "@enums";
+import { useCookies } from "react-cookie";
+
+const COOKIE_CONFIG = {
+  path: "/",
+  maxAge: 3600,
+  sameSite: true
+};
 
 export function useToken() {
-  const isClientSide = typeof window !== "undefined" && window.localStorage;
-
-  if (!isClientSide) return {};
-
-  const token = localStorage.getItem(StorageEnum.TOKEN);
+  const [cookie, setCookie, removeCookie] = useCookies([StorageEnum.TOKEN]);
   
-  const clearToken = () => localStorage.removeItem(StorageEnum.TOKEN);
-  const setToken = (tokenType, token) => localStorage.setItem(StorageEnum.TOKEN, `${tokenType} ${token}`);
+  const clearToken = () => removeCookie(StorageEnum.TOKEN, COOKIE_CONFIG);
+  const setToken = (tokenType, token) => setCookie(
+    StorageEnum.TOKEN,
+    `${tokenType} ${token}`,
+    COOKIE_CONFIG
+  );
 
   return {
-    token,
-    hasAuth: !!token,
+    token: cookie.token,
+    hasAuth: !!cookie.token,
     setToken,
     clearToken
   };

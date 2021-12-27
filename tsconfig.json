@@ -22,7 +22,8 @@
       "@hooks/*": ["hooks/*"],
       "@types": ["types"],
       "@images": ["assets/images"],
-      "@enums": ["enums"]
+      "@enums": ["enums"],
+      "@core": ["core"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

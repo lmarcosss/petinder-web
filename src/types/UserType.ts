@@ -19,3 +19,12 @@ export interface IUserStepTwo {
 }
 
 export interface IUserFormProperties extends IUserStepOne, IUserStepTwo {}
+
+export interface IUser {
+  name: string;
+  cpf: string;
+  phone: string;
+  birthDay: string;
+  description: string;
+  email: string;
+}
