@@ -3,7 +3,7 @@ import { IAnnouncement } from "@types";
 import { AnnouncementStatusEnum } from "@enums";
 
 const cursor = {
-  [AnnouncementStatusEnum.ABERTO]: "pointer"
+  [AnnouncementStatusEnum.ABERTO]: "pointer",
 };
 
 interface IProps {
@@ -22,11 +22,17 @@ export function Announcement({ data }: IProps) {
       <Image src={data.pictures[0].url} alt={String(data.id)} />
 
       <Box p="6">
-        <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+        <Box
+          mt="1"
+          fontWeight="semibold"
+          as="h4"
+          lineHeight="tight"
+          isTruncated
+        >
           {data.description}
         </Box>
 
-        <Box>{data.location || "Bairro Centro"}</Box>
+        <Box>{data.city}</Box>
       </Box>
     </Box>
   );

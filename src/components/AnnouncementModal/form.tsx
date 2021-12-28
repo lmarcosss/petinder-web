@@ -2,16 +2,19 @@ import { useRef, useState } from "react";
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
 import { useAnnouncementModal } from "@contexts";
-import { createAnnouncement } from "@services/petinder/announcement";
+import {
+  createAnnouncement,
+  editAnnouncement,
+} from "@services/petinder/announcement";
 import { useGeolocation } from "@hooks/useGeolocation";
-import { IAnnouncementEdit, IPicture } from "@types";
+import { IAnnouncement, IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
 import { decodedToken } from "@core";
 
 interface IProps {
-  initialData?: IAnnouncementEdit;
+  initialData?: IAnnouncement;
 }
 
 export function CreateAnnouncement({ initialData }: IProps) {
@@ -20,7 +23,7 @@ export function CreateAnnouncement({ initialData }: IProps) {
   const [loading, setLoading] = useState(false);
   const { onClose } = useAnnouncementModal();
 
-  async function handleSubmit(data) {
+  async function handleSubmit(data: IAnnouncementForm) {
     setLoading(true);
 
     try {
@@ -37,16 +40,29 @@ export function CreateAnnouncement({ initialData }: IProps) {
         });
 
         const { picture, ...rest } = data;
+        const pictures = [picture];
 
-        const { userId } = decodedToken();
+        if (initialData) {
+          const announcement = {
+            ...initialData,
+            ...rest,
+            pictures,
+          };
 
-        await createAnnouncement({
-          ...rest,
-          pictures: [picture] as IPicture[],
-          longitude: position.longitude,
-          latitude: position.latitude,
-          userId,
-        });
+          await editAnnouncement(announcement);
+        } else {
+          const { userId } = decodedToken();
+
+          const announcement = {
+            ...rest,
+            pictures,
+            userId,
+            longitude: position.longitude,
+            latitude: position.latitude,
+          };
+
+          await createAnnouncement(announcement);
+        }
 
         onClose();
       }
@@ -63,8 +79,19 @@ export function CreateAnnouncement({ initialData }: IProps) {
     }
   }
 
+  const formattedInitialData = initialData
+    ? {
+        ...initialData,
+        picture: initialData.pictures[0].url,
+      }
+    : null;
+
   return (
-    <Form ref={formRef} onSubmit={handleSubmit} initialData={initialData}>
+    <Form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      initialData={formattedInitialData}
+    >
       <TextInput
         label="Título"
         iconInput={<Icon as={FiType} fontSize="20" mt="2" />}

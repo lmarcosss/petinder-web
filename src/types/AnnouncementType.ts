@@ -7,16 +7,22 @@ export interface IPicture {
 }
 
 export interface IAnnouncementEdit {
-  id: number;
+  pictures: string[];
   title: string;
   description: string;
-  picture: IPicture[];
+  id: number;
+  status: AnnouncementStatusEnum;
+  owner: IResponseUser;
+  closed: boolean;
 }
 
 export interface IAnnouncementCreate {
+  pictures: string[];
+  userId: number;
+  longitude: number;
+  latitude: number;
   title: string;
   description: string;
-  picture: IPicture[];
 }
 
 export interface IAnnouncement {
@@ -27,16 +33,11 @@ export interface IAnnouncement {
   pictures: IPicture[];
   owner: IResponseUser;
   closed: boolean;
-  location: string;
+  city: string;
 }
 
-export interface IAnnouncementForm extends IStepOneAnnouncement, IStepTwoAnnouncement {}
-
-export interface IStepOneAnnouncement {
+export interface IAnnouncementForm {
   title: string;
   description: string;
-}
-
-export interface IStepTwoAnnouncement {
-  pictures: IPicture[];
+  picture: string;
 }
