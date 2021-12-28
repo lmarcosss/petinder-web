@@ -14,7 +14,7 @@ import {
   Icon,
   useToast,
 } from "@chakra-ui/react";
-import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
+import { useSidebarDrawer } from "@contexts";
 import { MenuEnum } from "enums";
 import {
   FiFileText,
@@ -25,7 +25,7 @@ import {
   FiFilePlus,
 } from "react-icons/fi";
 import { useToken } from "@hooks/useToken";
-import { useAnnouncementModal } from "@contexts/announcementContext";
+import { useAnnouncementModal } from "@contexts";
 import { IconType } from "react-icons";
 import { useGeolocation } from "@hooks/useGeolocation";
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Flex, Icon, IconButton } from "@chakra-ui/react";
 import { RiMenuLine, RiUser3Fill } from "react-icons/ri";
 
-import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
+import { useSidebarDrawer } from "@contexts";
 import { useWindowEvent } from "@hooks/useWindowEvent";
 import { Navbar } from "./Navbar";
 import { Logo } from "./Logo";

@@ -1,21 +1,30 @@
+import { useRef, useState } from "react";
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
-// import { useGeolocation } from "@hooks/useGeolocation";
-import { IAnnouncementEdit } from "@types";
+import { useAnnouncementModal } from "@contexts";
+import {
+  createAnnouncement,
+  editAnnouncement,
+} from "@services/petinder/announcement";
+import { useGeolocation } from "@hooks/useGeolocation";
+import { IAnnouncement, IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
-import { useRef } from "react";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
 
 interface IProps {
-  initialData?: IAnnouncementEdit;
+  initialData?: IAnnouncement;
 }
 
 export function CreateAnnouncement({ initialData }: IProps) {
   const formRef = useRef(null);
-  // const { position } = useGeolocation();
+  const { position } = useGeolocation();
+  const [loading, setLoading] = useState(false);
+  const { onClose } = useAnnouncementModal();
 
-  async function handleSubmit(data) {
+  async function handleSubmit(data: IAnnouncementForm) {
+    setLoading(true);
+
     try {
       if (formRef?.current) {
         formRef.current.setErrors({});
@@ -28,9 +37,31 @@ export function CreateAnnouncement({ initialData }: IProps) {
         await schema.validate(data, {
           abortEarly: false,
         });
-      }
 
-      // TODO: Quando tiver initialData, no caso id chamar função de editar, senão chamar função de criar anúncio
+        const { picture, ...rest } = data;
+        const pictures = [picture];
+
+        if (initialData) {
+          const announcement = {
+            ...initialData,
+            ...rest,
+            pictures,
+          };
+
+          await editAnnouncement(announcement);
+        } else {
+          const announcement = {
+            ...rest,
+            pictures,
+            longitude: position.longitude,
+            latitude: position.latitude,
+          };
+
+          await createAnnouncement(announcement);
+        }
+
+        onClose();
+      }
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -39,11 +70,24 @@ export function CreateAnnouncement({ initialData }: IProps) {
         });
         formRef.current.setErrors(validationErrors);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
+  const formattedInitialData = initialData
+    ? {
+        ...initialData,
+        picture: initialData.pictures[0].url,
+      }
+    : null;
+
   return (
-    <Form ref={formRef} onSubmit={handleSubmit} initialData={initialData}>
+    <Form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      initialData={formattedInitialData}
+    >
       <TextInput
         label="Título"
         iconInput={<Icon as={FiType} fontSize="20" mt="2" />}
@@ -71,6 +115,7 @@ export function CreateAnnouncement({ initialData }: IProps) {
         colorScheme="orange"
         mt="6"
         mb="4"
+        isLoading={loading}
       >
         Salvar
       </Button>

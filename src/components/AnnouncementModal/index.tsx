@@ -1,10 +1,10 @@
 import { Modal } from "@components";
-import { useAnnouncementModal } from "@contexts/announcementContext";
-import { IAnnouncementEdit } from "@types";
+import { useAnnouncementModal } from "@contexts";
+import { IAnnouncement } from "@types";
 import { CreateAnnouncement } from "./form";
 
 interface IProps {
-  initialData?: IAnnouncementEdit;
+  initialData?: IAnnouncement;
 }
 
 export function AnnouncementModal({ initialData }: IProps) {
