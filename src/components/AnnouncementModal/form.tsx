@@ -1,10 +1,10 @@
 import { Button, Icon } from "@chakra-ui/react";
-import { useAnnouncementModal } from "@contexts/AnnouncementContext";
+import { useAnnouncementModal } from "../../contexts/AnnouncementContext";
 import { TextAreaInput, TextInput } from "@components";
 import { getUserInfo } from "@services/auth/user";
 import { createAnnouncement } from "@services/petinder/announcement";
 import { useGeolocation } from "@hooks/useGeolocation";
-import { IAnnouncementEdit } from "@types";
+import { IAnnouncementEdit, IPicture } from "@types";
 import { Form } from "@unform/web";
 import { useRef, useState } from "react";
 import { FiImage, FiType } from "react-icons/fi";
@@ -42,7 +42,7 @@ export function CreateAnnouncement({ initialData }: IProps) {
 
         await createAnnouncement({
           ...rest,
-          pictures: [picture],
+          pictures: [picture] as IPicture[],
           longitude: position.longitude,
           latitude: position.latitude,
           userId: userInfo.id,

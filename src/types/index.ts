@@ -1,4 +1,4 @@
-import { IAnnouncement, IAnnouncementForm, IAnnouncementEdit, IAnnouncementCreate } from "./AnnouncementType";
+import { IAnnouncement, IAnnouncementForm, IAnnouncementEdit, IAnnouncementCreate, IPicture } from "./AnnouncementType";
 import { IResponseUser, IUser } from "./UserType";
 
 export type {
@@ -8,4 +8,5 @@ export type {
     IAnnouncementEdit,
     IAnnouncementCreate,
     IUser,
+    IPicture,
 };
