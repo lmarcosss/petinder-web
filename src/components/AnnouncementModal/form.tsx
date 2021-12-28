@@ -1,23 +1,19 @@
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
-import { IAnnouncementForm } from "@types";
+// import { useGeolocation } from "@hooks/useGeolocation";
+import { IAnnouncementEdit } from "@types";
 import { Form } from "@unform/web";
 import { useRef } from "react";
-import { FiType } from "react-icons/fi";
+import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
 
 interface IProps {
-    goToStepTwo(): void;
-    onChangeFormProperties(data: unknown): void;
-    formProperties: IAnnouncementForm;
-  }
+  initialData?: IAnnouncementEdit;
+}
 
-export function StepOneCreateAnnouncement({
-  goToStepTwo,
-  onChangeFormProperties,
-  formProperties
-}: IProps) {
+export function CreateAnnouncement({ initialData }: IProps) {
   const formRef = useRef(null);
+  // const { position } = useGeolocation();
 
   async function handleSubmit(data) {
     try {
@@ -25,16 +21,16 @@ export function StepOneCreateAnnouncement({
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
           title: Yup.string().required("Título é obrigatório"),
-          description: Yup.string().required("Descrição é obrigatória")
+          description: Yup.string().required("Descrição é obrigatória"),
+          picture: Yup.string().required("Foto é obrigatória"),
         });
 
         await schema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         });
-
-        goToStepTwo();
-        onChangeFormProperties(data);
       }
+
+      // TODO: Quando tiver initialData, no caso id chamar função de editar, senão chamar função de criar anúncio
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -46,17 +42,8 @@ export function StepOneCreateAnnouncement({
     }
   }
 
-  const initialData = formProperties ? {
-    title: formProperties?.title,
-    description: formProperties?.description
-  } : null;
-
   return (
-    <Form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      initialData={initialData}
-    >
+    <Form ref={formRef} onSubmit={handleSubmit} initialData={initialData}>
       <TextInput
         label="Título"
         iconInput={<Icon as={FiType} fontSize="20" mt="2" />}
@@ -69,8 +56,23 @@ export function StepOneCreateAnnouncement({
         placeholder="Sua descrição"
         name="description"
       />
-      <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
-          Avançar
+
+      <TextInput
+        placeholder="Foto do anúncio"
+        label="Foto"
+        name="picture"
+        iconInput={<Icon as={FiImage} fontSize="20" mt="2" />}
+      />
+
+      <Button
+        width="100%"
+        type="submit"
+        size="lg"
+        colorScheme="orange"
+        mt="6"
+        mb="4"
+      >
+        Salvar
       </Button>
     </Form>
   );

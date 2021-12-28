@@ -1,4 +1,4 @@
-import { Icon, Button, Text, Link } from "@chakra-ui/react"; 
+import { Icon, Button, Text, Link } from "@chakra-ui/react";
 import { Form } from "@unform/web";
 import { TextInput } from "@components";
 import { useRef } from "react";
@@ -13,10 +13,14 @@ interface IProps {
   formProperties: IUserStepOne;
 }
 
-export function StepOneUser({ goToStepTwo, onChangeFormProperties, formProperties }: IProps) {
+export function StepOneUser({
+  goToStepTwo,
+  onChangeFormProperties,
+  formProperties,
+}: IProps) {
   const route = useRouter();
   const formRef = useRef(null);
-  
+
   function handleChangeForm() {
     route.push("/login");
   }
@@ -29,15 +33,23 @@ export function StepOneUser({ goToStepTwo, onChangeFormProperties, formPropertie
           cpf: Yup.string().required("CPF é obrigatório"),
           name: Yup.string().required("Nome é obrigatório"),
           phone: Yup.string().required("Celular é obrigatório"),
-          birthDay: Yup.date().required("Data de nascimento é obrigatória")
+          birthDay: Yup.date().required("Data de nascimento é obrigatória"),
         });
 
         await schema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         });
 
+        const { cpf, phone, ...restData } = data;
+
+        const formattedData = {
+          ...restData,
+          cpf: cpf.replace(/\D/g, ""),
+          phone: phone.replace(/\D/g, ""),
+        };
+
         goToStepTwo();
-        onChangeFormProperties(data);
+        onChangeFormProperties(formattedData);
       }
     } catch (err) {
       const validationErrors = {};
@@ -50,19 +62,17 @@ export function StepOneUser({ goToStepTwo, onChangeFormProperties, formPropertie
     }
   }
 
-  const initialData = formProperties ? {
-    name: formProperties?.name,
-    cpf: formProperties?.cpf,
-    phone: formProperties?.phone,
-    birthDay: formProperties?.birthDay
-  } : null;
+  const initialData = formProperties
+    ? {
+        name: formProperties?.name,
+        cpf: formProperties?.cpf,
+        phone: formProperties?.phone,
+        birthDay: formProperties?.birthDay,
+      }
+    : null;
 
   return (
-    <Form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      initialData={initialData}
-    >
+    <Form ref={formRef} onSubmit={handleSubmit} initialData={initialData}>
       <TextInput
         label="Nome"
         iconInput={<Icon as={FiUser} fontSize="20" mt="2" />}
@@ -96,7 +106,7 @@ export function StepOneUser({ goToStepTwo, onChangeFormProperties, formPropertie
       />
 
       <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
-          Avançar
+        Avançar
       </Button>
       <Text fontSize={["12", "14"]} pt="2">
         Já tem uma conta?

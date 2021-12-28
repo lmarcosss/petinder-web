@@ -7,6 +7,7 @@ import { useSidebarDrawer } from "@contexts/SidebarDrawerContext";
 import { useWindowEvent } from "@hooks/useWindowEvent";
 import { Navbar } from "./Navbar";
 import { Logo } from "./Logo";
+import { AnnouncementModal } from "@components";
 
 const PAGE_TOP = 0;
 
@@ -59,6 +60,7 @@ export function Header() {
         onClick={onOpen}
       />
       <Navbar />
+      <AnnouncementModal />
     </Flex>
   );
 }

@@ -2,7 +2,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@next/next/recommended"
   ],
   "plugins": [
     "react",
@@ -25,12 +26,7 @@
     ],
     "semi": [
       "error"
-    ],
-    "indent": ["error", 2],
-      "comma-dangle": ["error", {
-        "arrays": "never",
-        "objects": "never"
-    }]
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 6,
@@ -51,5 +47,10 @@
     "dist",
     "public",
     ".next"
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

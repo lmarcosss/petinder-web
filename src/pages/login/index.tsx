@@ -25,16 +25,21 @@ export default function Login() {
       if (formRef?.current) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
-          email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
-          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória")
+          email: Yup.string()
+            .email("E-mail deve ser válido")
+            .required("E-mail é obrigatório"),
+          password: Yup.string()
+            .min(6, "Mínimo de 6 caracteres")
+            .required("Senha é obrigatória"),
         });
         await schema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         });
 
         // Validation passed
+
         const {
-          data: { token, tokenType }
+          data: { token, tokenType },
         } = await doLogin(data.email, data.password);
 
         setToken(tokenType, token);
@@ -48,7 +53,7 @@ export default function Login() {
           validationErrors[error.path] = error.message;
         });
         formRef.current.setErrors(validationErrors);
-        
+
         return;
       }
 
@@ -56,7 +61,7 @@ export default function Login() {
         description: err.response.data.message || ToastrEnum.UNEXPECTED_ERROR,
         status: "error",
         position: "top-right",
-        isClosable: true
+        isClosable: true,
       });
     }
   }
@@ -67,10 +72,7 @@ export default function Login() {
 
   return (
     <BaseFormScreen goBack={goBack} image="register.jfif">
-      <Form
-        onSubmit={handleSubmit}
-        ref={formRef}
-      >
+      <Form onSubmit={handleSubmit} ref={formRef}>
         <TextInput
           label="E-mail"
           iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
@@ -78,19 +80,21 @@ export default function Login() {
           name="email"
         />
 
-        <PasswordInput
-          label="Senha"
-          name="password"
-          placeholder="sua senha"
-        />
+        <PasswordInput label="Senha" name="password" placeholder="sua senha" />
 
-        <Button width="100%" type="submit" size="lg" colorScheme="orange" mt="6">
-            Entrar
+        <Button
+          width="100%"
+          type="submit"
+          size="lg"
+          colorScheme="orange"
+          mt="6"
+        >
+          Entrar
         </Button>
         <Text fontSize={["12", "14"]} pt="2">
-            Ainda não tem uma conta?
+          Ainda não tem uma conta?
           <Link ml="4px" fontWeight="bold" onClick={handleChangeForm}>
-              Cadastre-se!
+            Cadastre-se!
           </Link>
         </Text>
       </Form>
