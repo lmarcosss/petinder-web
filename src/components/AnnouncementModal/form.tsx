@@ -11,7 +11,6 @@ import { IAnnouncement, IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
-import { decodedToken } from "@core";
 
 interface IProps {
   initialData?: IAnnouncement;
