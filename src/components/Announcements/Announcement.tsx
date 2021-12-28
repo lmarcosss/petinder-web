@@ -1,6 +1,8 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Icon, IconButton, Image } from "@chakra-ui/react";
 import { IAnnouncement } from "@types";
 import { AnnouncementStatusEnum } from "@enums";
+import { FiEdit } from "react-icons/fi";
+import { useAnnouncementModal } from "@contexts";
 
 const cursor = {
   [AnnouncementStatusEnum.ABERTO]: "pointer",
@@ -8,9 +10,16 @@ const cursor = {
 
 interface IProps {
   data: IAnnouncement;
+  isMyAnnouncement?: boolean;
 }
 
-export function Announcement({ data }: IProps) {
+export function Announcement({ data, isMyAnnouncement }: IProps) {
+  const { onOpen } = useAnnouncementModal();
+
+  function onOpenModal() {
+    onOpen(data);
+  }
+
   return (
     <Box
       cursor={cursor[data.status]}
@@ -21,18 +30,26 @@ export function Announcement({ data }: IProps) {
     >
       <Image src={data.pictures[0].url} alt={String(data.id)} />
 
-      <Box p="6">
-        <Box
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          isTruncated
-        >
+      <Box position="relative" p="6">
+        <Box mt="1" fontWeight="bold" as="h4" lineHeight="tight" isTruncated>
+          {data.title}
+        </Box>
+        <Box mt="1" as="h2" fontWeight="500" lineHeight="tight" isTruncated>
           {data.description}
         </Box>
 
         <Box>{data.city}</Box>
+        {isMyAnnouncement && (
+          <IconButton
+            onClick={onOpenModal}
+            icon={<Icon as={FiEdit} />}
+            aria-label="Open edit modal"
+            position="absolute"
+            right="5"
+            bottom="6"
+            colorScheme="orange"
+          />
+        )}
       </Box>
     </Box>
   );

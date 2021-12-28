@@ -17,7 +17,7 @@ export function createAnnouncement(announcement: IAnnouncementCreate) {
 export function editAnnouncement(announcement: IAnnouncementEdit) {
   const headers = getAuthorizationHeader();
 
-  return api.post(`${endpoint}/${announcement.id}`, announcement, { headers });
+  return api.put(`${endpoint}/${announcement.id}`, announcement, { headers });
 }
 
 export function getMyAnnouncements(req) {

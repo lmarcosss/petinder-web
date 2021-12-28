@@ -19,10 +19,13 @@ interface IProps {
 
 function MyAnnouncements({ announcements }: IProps) {
   const [filter, setFilter] = useState("");
-  const [filteredAnnouncements, setFilteredAnnouncements] = useState(announcements);
+  const [filteredAnnouncements, setFilteredAnnouncements] =
+    useState(announcements);
 
   useEffect(() => {
-    const newFilteredAnnouncements = announcements.filter((announcement) => announcement.description.includes(filter));
+    const newFilteredAnnouncements = announcements.filter((announcement) =>
+      announcement.description.includes(filter)
+    );
     setFilteredAnnouncements(newFilteredAnnouncements);
   }, [announcements, filter]);
 
@@ -39,10 +42,7 @@ function MyAnnouncements({ announcements }: IProps) {
         justifyContent="center"
       >
         <Box>
-          <Text
-          fontSize="3xl"
-          fontWeight={700}
-          >
+          <Text fontSize="3xl" fontWeight={700}>
             Meus Anúncios
           </Text>
         </Box>
@@ -67,7 +67,7 @@ function MyAnnouncements({ announcements }: IProps) {
         </Flex>
         <Box width={216} />
       </Flex>
-      <Announcements announcements={filteredAnnouncements} />
+      <Announcements isMyAnnouncements announcements={filteredAnnouncements} />
     </Box>
   );
 }

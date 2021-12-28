@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 interface IPosition {
   latitude?: number;
@@ -20,13 +20,13 @@ export function useGeolocation(options?: unknown) {
     });
   }
 
-  function getCurrentPosition() {
+  const getCurrentPosition = useCallback(() => {
     navigator.geolocation.getCurrentPosition(getPosition, setError, options);
-  }
+  }, [options]);
 
   useEffect(() => {
     getCurrentPosition();
-  }, []);
+  }, [getCurrentPosition]);
 
   return { position, error };
 }
