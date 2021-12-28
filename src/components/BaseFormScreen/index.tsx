@@ -31,27 +31,27 @@ interface IProps {
 
 export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem de pets", goBack }: IProps) {
   const windowSize = useWindowSize();
-  const isSmallerDevices = windowSize.width > 1669;
+  const isBigDevice = windowSize.width > 1669;
 
 
   return (
-    <Flex position="relative" flexDirection="row" width="100%" h="100vh">
+    <Flex position="relative" flexDirection="row" width="100%" h="100%" overflowY="scroll">
       <ImageBackground
         image={`/images/${image}`}
         alt={alt}
-        isSmallerDevices={!isSmallerDevices}
+        isSmallerDevices={!isBigDevice}
       />
       <Flex
         direction="column"
         align="center"
-        width={isSmallerDevices ? "30%" : "100%"}
+        width={isBigDevice ? "30%" : "100%"}
         height={"100%"}
         shadow="md"
         backgroundColor="white"
       >
         <Flex
           width="100%"
-          height="100vh"
+          height="100%"
           direction="column"
           align="center"
           padding="8"
