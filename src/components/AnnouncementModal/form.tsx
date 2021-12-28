@@ -2,13 +2,13 @@ import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
 import { getUserInfo } from "@services/auth/user";
 import { createAnnouncement } from "@services/petinder/announcement";
+import { useAnnouncementModal } from "@contexts/AnnouncementContext";
 import { useGeolocation } from "@hooks/useGeolocation";
 import { IAnnouncementEdit } from "@types";
 import { Form } from "@unform/web";
 import { useRef, useState } from "react";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
-import { useAnnouncementModal } from "@contexts/AnnouncementContext";
 
 interface IProps {
   initialData?: IAnnouncementEdit;
