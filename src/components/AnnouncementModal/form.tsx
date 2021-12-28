@@ -51,12 +51,9 @@ export function CreateAnnouncement({ initialData }: IProps) {
 
           await editAnnouncement(announcement);
         } else {
-          const { userId } = decodedToken();
-
           const announcement = {
             ...rest,
             pictures,
-            userId,
             longitude: position.longitude,
             latitude: position.latitude,
           };

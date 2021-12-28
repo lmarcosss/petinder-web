@@ -18,7 +18,6 @@ export interface IAnnouncementEdit {
 
 export interface IAnnouncementCreate {
   pictures: string[];
-  userId: number;
   longitude: number;
   latitude: number;
   title: string;
