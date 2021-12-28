@@ -2,13 +2,13 @@ import { useRef, useState } from "react";
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
 import { useAnnouncementModal } from "@contexts";
-import { getUserInfo } from "@services/auth/user";
 import { createAnnouncement } from "@services/petinder/announcement";
 import { useGeolocation } from "@hooks/useGeolocation";
 import { IAnnouncementEdit, IPicture } from "@types";
 import { Form } from "@unform/web";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
+import { decodedToken } from "@core";
 
 interface IProps {
   initialData?: IAnnouncementEdit;
@@ -38,14 +38,14 @@ export function CreateAnnouncement({ initialData }: IProps) {
 
         const { picture, ...rest } = data;
 
-        const { data: userInfo } = await getUserInfo(null);
+        const { userId } = decodedToken();
 
         await createAnnouncement({
           ...rest,
           pictures: [picture] as IPicture[],
           longitude: position.longitude,
           latitude: position.latitude,
-          userId: userInfo.id,
+          userId,
         });
 
         onClose();
