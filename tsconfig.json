@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,9 +17,9 @@
     "baseUrl": "./src",
     "paths": {
       "@services/*": ["services/*"],
-      "@components": ["components"],
-      "@contexts/*": ["contexts/*"],
+      "@contexts": ["contexts"],
       "@hooks/*": ["hooks/*"],
+      "@components": ["components"],
       "@types": ["types"],
       "@images": ["assets/images"],
       "@enums": ["enums"],

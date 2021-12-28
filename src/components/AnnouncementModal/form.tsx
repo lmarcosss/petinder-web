@@ -1,12 +1,12 @@
+import { useRef, useState } from "react";
 import { Button, Icon } from "@chakra-ui/react";
-import { useAnnouncementModal } from "../../contexts/AnnouncementContext";
 import { TextAreaInput, TextInput } from "@components";
+import { useAnnouncementModal } from "@contexts";
 import { getUserInfo } from "@services/auth/user";
 import { createAnnouncement } from "@services/petinder/announcement";
 import { useGeolocation } from "@hooks/useGeolocation";
 import { IAnnouncementEdit, IPicture } from "@types";
 import { Form } from "@unform/web";
-import { useRef, useState } from "react";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
 
