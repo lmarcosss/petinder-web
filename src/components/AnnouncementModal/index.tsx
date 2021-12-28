@@ -1,5 +1,5 @@
 import { Modal } from "@components";
-import { useAnnouncementModal } from "@contexts/announcementContext";
+import { useAnnouncementModal } from "@contexts/AnnouncementContext";
 import { IAnnouncementEdit } from "@types";
 import { CreateAnnouncement } from "./form";
 

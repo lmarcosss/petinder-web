@@ -13,6 +13,12 @@ export interface IAnnouncementEdit {
   picture: IPicture[];
 }
 
+export interface IAnnouncementCreate {
+  title: string;
+  description: string;
+  picture: IPicture[];
+}
+
 export interface IAnnouncement {
   id: number;
   title: string;

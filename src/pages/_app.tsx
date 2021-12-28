@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { SidebarDrawerProvider } from "@contexts/SidebarDrawerContext";
 import { AppProps } from "next/app";
 import { CookiesProvider } from "react-cookie";
-import { AnnouncementModalProvider } from "@contexts/announcementContext";
+import { AnnouncementModalProvider } from "@contexts/AnnouncementContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -25,7 +25,7 @@ import {
   FiFilePlus,
 } from "react-icons/fi";
 import { useToken } from "@hooks/useToken";
-import { useAnnouncementModal } from "@contexts/announcementContext";
+import { useAnnouncementModal } from "@contexts/AnnouncementContext";
 import { IconType } from "react-icons";
 import { useGeolocation } from "@hooks/useGeolocation";
 
