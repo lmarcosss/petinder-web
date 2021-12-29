@@ -6,7 +6,7 @@ import { FiCalendar, FiPhone, FiUser } from "react-icons/fi";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { IUserStepOne } from "types/UserType";
-
+import { formatDate, formatStringToDate } from "@core";
 interface IProps {
   goToStepTwo(): void;
   onChangeFormProperties(data: IUserStepOne): void;
@@ -36,9 +36,17 @@ export function StepOneUser({
           birthDay: Yup.date().required("Data de nascimento é obrigatória"),
         });
 
-        await schema.validate(data, {
-          abortEarly: false,
-        });
+        const birthDay = formatStringToDate(data.birthDay);
+
+        await schema.validate(
+          {
+            ...data,
+            birthDay,
+          },
+          {
+            abortEarly: false,
+          }
+        );
 
         const { cpf, phone, ...restData } = data;
 
@@ -46,6 +54,7 @@ export function StepOneUser({
           ...restData,
           cpf: cpf.replace(/\D/g, ""),
           phone: phone.replace(/\D/g, ""),
+          birthDay,
         };
 
         goToStepTwo();
@@ -67,7 +76,7 @@ export function StepOneUser({
         name: formProperties?.name,
         cpf: formProperties?.cpf,
         phone: formProperties?.phone,
-        birthDay: formProperties?.birthDay,
+        birthDay: formatDate(formProperties?.birthDay),
       }
     : null;
 
