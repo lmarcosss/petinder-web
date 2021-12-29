@@ -6,16 +6,12 @@ import { useRouter } from "next/router";
 import { Button, Icon, useToast } from "@chakra-ui/react";
 import { Form } from "@unform/web";
 import { BaseFormScreen, TextAreaInput, TextInput } from "@components";
-import {
-  FiCalendar,
-  FiPhone,
-  FiUser,
-  FiMail
-} from "react-icons/fi";
+import { FiCalendar, FiPhone, FiUser, FiMail } from "react-icons/fi";
 import { ToastrEnum } from "@enums";
+import { formatDate, formatStringToDate } from "@core";
 
 interface IProps {
-  userInfo: IUser[];
+  userInfo: IUser;
 }
 
 function MyProfilePage({ userInfo }: IProps) {
@@ -27,7 +23,7 @@ function MyProfilePage({ userInfo }: IProps) {
   function goBack() {
     router.back();
   }
-  
+
   function resetToHome() {
     router.replace("/");
   }
@@ -41,21 +37,34 @@ function MyProfilePage({ userInfo }: IProps) {
           name: Yup.string().required("Nome é obrigatório"),
           phone: Yup.string().required("Celular é obrigatório"),
           birthDay: Yup.date().required("Data de nascimento é obrigatória"),
-          email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
-          description: Yup.string().required("Descrição é obrigatória")
+          email: Yup.string()
+            .email("E-mail deve ser válido")
+            .required("E-mail é obrigatório"),
+          description: Yup.string().required("Descrição é obrigatória"),
         });
 
-        await schema.validate(data, {
-          abortEarly: false
-        });
+        const birthDay = formatStringToDate(data.birthDay);
 
-        await saveUser(data);
+        await schema.validate(
+          {
+            ...data,
+            birthDay,
+          },
+          {
+            abortEarly: false,
+          }
+        );
+
+        await saveUser({
+          ...data,
+          birthDay,
+        });
 
         toastr({
           description: ToastrEnum.USER_UPDATE_SUCCESS,
           status: "success",
           position: "top-right",
-          isClosable: true
+          isClosable: true,
         });
 
         resetToHome();
@@ -75,17 +84,22 @@ function MyProfilePage({ userInfo }: IProps) {
         description: err.response.data.message || ToastrEnum.UNEXPECTED_ERROR,
         status: "error",
         position: "top-right",
-        isClosable: true
+        isClosable: true,
       });
     }
   }
+
+  const userInfoFormatted = {
+    ...userInfo,
+    birthDay: formatDate(userInfo.birthDay),
+  };
 
   return (
     <BaseFormScreen goBack={goBack}>
       <Form
         ref={formRef}
         onSubmit={handleSubmit}
-        initialData={userInfo}
+        initialData={userInfoFormatted}
       >
         <TextInput
           label="Nome"
@@ -133,7 +147,7 @@ function MyProfilePage({ userInfo }: IProps) {
           colorScheme="orange"
           mt="6"
         >
-        Salvar
+          Salvar
         </Button>
       </Form>
     </BaseFormScreen>
