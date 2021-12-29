@@ -1,6 +1,6 @@
 import { Button, Link, Text, Icon, useToast } from "@chakra-ui/react";
 import { BaseFormScreen, PasswordInput, TextInput } from "@components";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Form } from "@unform/web";
 import { FiMail } from "react-icons/fi";
 import * as Yup from "yup";
@@ -12,6 +12,7 @@ import { ToastrEnum } from "@enums";
 export default function Login() {
   const route = useRouter();
   const toastr = useToast();
+  const [isLoading, setLoading] = useState(false);
   const { setToken } = useToken();
   const formRef = useRef(null);
 
@@ -20,6 +21,7 @@ export default function Login() {
   }
 
   async function handleSubmit(data) {
+    setLoading(true);
     try {
       // Remove all previous errors
       if (formRef?.current) {
@@ -63,6 +65,8 @@ export default function Login() {
         position: "top-right",
         isClosable: true,
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -88,6 +92,7 @@ export default function Login() {
           size="lg"
           colorScheme="orange"
           mt="6"
+          isLoading={isLoading}
         >
           Entrar
         </Button>
