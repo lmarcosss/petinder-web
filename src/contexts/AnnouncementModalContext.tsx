@@ -1,3 +1,4 @@
+import { IAnnouncement } from "@types";
 import { useRouter } from "next/router";
 import {
   createContext,
@@ -10,7 +11,8 @@ import {
 interface IContextProps {
   isVisible: boolean;
   onClose: () => void;
-  onOpen: () => void;
+  onOpen: (initialData?: IAnnouncement) => void;
+  initialData?: IAnnouncement;
 }
 
 const AnnouncementModalContext = createContext({} as IContextProps);
@@ -21,13 +23,16 @@ interface IProps {
 
 export function AnnouncementModalProvider({ children }: IProps) {
   const [isVisible, setVisible] = useState(false);
+  const [initialData, setInitialData] = useState(null);
   const router = useRouter();
 
   function onClose() {
+    setInitialData(null);
     setVisible(false);
   }
 
-  function onOpen() {
+  function onOpen(initialData: IAnnouncement) {
+    setInitialData(initialData);
     setVisible(true);
   }
 
@@ -42,6 +47,7 @@ export function AnnouncementModalProvider({ children }: IProps) {
         onOpen,
         onClose,
         isVisible,
+        initialData,
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import { Icon, Button } from "@chakra-ui/react";
 import { Form } from "@unform/web";
 import { PasswordInput, TextAreaInput, TextInput } from "@components";
 import { FiMail } from "react-icons/fi";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as Yup from "yup";
 import { IUserStepTwo } from "types/UserType";
 
@@ -12,22 +12,29 @@ interface IProps {
 
 export function StepTwoUser({ onSubmit }: IProps) {
   const formRef = useRef(null);
+  const [isLoading, setLoading] = useState(false);
 
   async function handleSubmit(data) {
+    setLoading(true);
+
     try {
       if (formRef?.current) {
         formRef.current.setErrors({});
         const schema = Yup.object().shape({
-          email: Yup.string().email("E-mail deve ser válido").required("E-mail é obrigatório"),
-          password: Yup.string().min(6, "Mínimo de 6 caracteres").required("Senha é obrigatória"),
-          confirmPassword: Yup.string().oneOf([
-            Yup.ref("password"), null
-          ], "Senhas devem ser iguais").required("Confirmação de senha é obrigatória"),
-          description: Yup.string().required("Descrição é obrigatória")
+          email: Yup.string()
+            .email("E-mail deve ser válido")
+            .required("E-mail é obrigatório"),
+          password: Yup.string()
+            .min(6, "Mínimo de 6 caracteres")
+            .required("Senha é obrigatória"),
+          confirmPassword: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Senhas devem ser iguais")
+            .required("Confirmação de senha é obrigatória"),
+          description: Yup.string().required("Descrição é obrigatória"),
         });
 
         await schema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         });
 
         await onSubmit(data);
@@ -40,14 +47,13 @@ export function StepTwoUser({ onSubmit }: IProps) {
         });
         formRef.current.setErrors(validationErrors);
       }
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <Form
-      ref={formRef}
-      onSubmit={handleSubmit}
-    >
+    <Form ref={formRef} onSubmit={handleSubmit}>
       <TextInput
         label="E-mail"
         iconInput={<Icon as={FiMail} fontSize="20" mt="2" />}
@@ -55,11 +61,7 @@ export function StepTwoUser({ onSubmit }: IProps) {
         name="email"
       />
 
-      <PasswordInput
-        label="Senha"
-        name="password"
-        placeholder="sua senha"
-      />
+      <PasswordInput label="Senha" name="password" placeholder="sua senha" />
 
       <PasswordInput
         label="Confirmação de senha"
@@ -74,6 +76,7 @@ export function StepTwoUser({ onSubmit }: IProps) {
       />
 
       <Button
+        isLoading={isLoading}
         width="100%"
         type="submit"
         size="lg"

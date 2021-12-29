@@ -7,20 +7,16 @@ import {
   editAnnouncement,
 } from "@services/petinder/announcement";
 import { useGeolocation } from "@hooks/useGeolocation";
-import { IAnnouncement, IAnnouncementForm } from "@types";
+import { IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
 
-interface IProps {
-  initialData?: IAnnouncement;
-}
-
-export function CreateAnnouncement({ initialData }: IProps) {
+export function CreateAnnouncement() {
   const formRef = useRef(null);
   const { position } = useGeolocation();
   const [loading, setLoading] = useState(false);
-  const { onClose } = useAnnouncementModal();
+  const { onClose, initialData } = useAnnouncementModal();
 
   async function handleSubmit(data: IAnnouncementForm) {
     setLoading(true);
@@ -46,6 +42,8 @@ export function CreateAnnouncement({ initialData }: IProps) {
             ...initialData,
             ...rest,
             pictures,
+            longitude: position.longitude,
+            latitude: position.latitude,
           };
 
           await editAnnouncement(announcement);

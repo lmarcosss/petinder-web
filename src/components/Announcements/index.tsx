@@ -4,9 +4,10 @@ import { Announcement } from "./Announcement";
 
 interface IProps {
   announcements: IAnnouncement[];
+  isMyAnnouncements?: boolean;
 }
 
-function List({ announcements }: IProps) {
+function List({ announcements, isMyAnnouncements }: IProps) {
   if (!announcements.length) {
     return (
       <Text align="center" p="8" fontSize={["14px", "16px"]}>
@@ -18,18 +19,21 @@ function List({ announcements }: IProps) {
   return (
     <>
       {announcements.map((data, index) => (
-        <Announcement key={index} data={data} />
+        <Announcement
+          isMyAnnouncement={isMyAnnouncements}
+          key={index}
+          data={data}
+        />
       ))}
     </>
   );
 }
 
-export function Announcements({ announcements }: IProps) {
+export function Announcements({ announcements, isMyAnnouncements }: IProps) {
   const isSmallerDevices = useBreakpointValue({
     base: true,
-    lg: false
+    lg: false,
   });
-
 
   const minSize = isSmallerDevices ? "250px" : "300px";
 
@@ -41,7 +45,10 @@ export function Announcements({ announcements }: IProps) {
       gap="4"
       justifyItems="center"
     >
-      <List announcements={announcements} />
+      <List
+        announcements={announcements}
+        isMyAnnouncements={isMyAnnouncements}
+      />
     </Grid>
   );
 }
