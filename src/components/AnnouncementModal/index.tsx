@@ -1,12 +1,12 @@
 import { Modal } from "@components";
-import { useAnnouncementModal } from "@contexts";
+import { useAnnouncement } from "@contexts";
 import { CreateAnnouncement } from "./form";
 
 export function AnnouncementModal() {
-  const { onClose, isVisible } = useAnnouncementModal();
+  const { onClose, isVisible, titleModal } = useAnnouncement();
 
   return (
-    <Modal isOpen={isVisible} onClose={onClose} title="Criar anúncio">
+    <Modal isOpen={isVisible} onClose={onClose} title={titleModal}>
       <CreateAnnouncement />
     </Modal>
   );

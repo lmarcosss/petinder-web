@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, Icon } from "@chakra-ui/react";
 import { TextAreaInput, TextInput } from "@components";
-import { useAnnouncementModal } from "@contexts";
+import { useAnnouncement } from "@contexts";
 import {
   createAnnouncement,
   editAnnouncement,
@@ -16,7 +16,15 @@ export function CreateAnnouncement() {
   const formRef = useRef(null);
   const { position } = useGeolocation();
   const [loading, setLoading] = useState(false);
-  const { onClose, initialData } = useAnnouncementModal();
+  const {
+    onClose,
+    initialData,
+    setAnnouncements,
+    announcements,
+    myAnnouncements,
+    isMyAnnouncement,
+    setMyAnnouncements,
+  } = useAnnouncement();
 
   async function handleSubmit(data: IAnnouncementForm) {
     setLoading(true);
@@ -55,7 +63,19 @@ export function CreateAnnouncement() {
             latitude: position.latitude,
           };
 
-          await createAnnouncement(announcement);
+          const { data: newAnnouncement } = await createAnnouncement(
+            announcement
+          );
+
+          const otherAnnouncements = isMyAnnouncement
+            ? myAnnouncements
+            : announcements;
+
+          const onChangeAnnouncement = isMyAnnouncement
+            ? setMyAnnouncements
+            : setAnnouncements;
+
+          onChangeAnnouncement([newAnnouncement, ...otherAnnouncements]);
         }
 
         onClose();
@@ -89,13 +109,13 @@ export function CreateAnnouncement() {
       <TextInput
         label="Título"
         iconInput={<Icon as={FiType} fontSize="20" mt="2" />}
-        placeholder="Seu título"
+        placeholder="Título do anúncio"
         name="title"
       />
 
       <TextAreaInput
         label="Descrição"
-        placeholder="Sua descrição"
+        placeholder="Descrição do anúncio"
         name="description"
       />
 
