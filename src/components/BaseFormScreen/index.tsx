@@ -17,6 +17,7 @@ function ImageBackground({ isSmallerDevices, image, alt }: IBackgroundProps) {
       alt={alt}
       width="70%"
       height="100%" 
+      minHeight="100vh"
       src={image}
     />
   );
@@ -35,7 +36,7 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
 
 
   return (
-    <Flex position="relative" flexDirection="row" width="100%" h="100%" overflowY="scroll">
+    <Flex position="relative" flexDirection="row" width="100%" overflowY="scroll">
       <ImageBackground
         image={`/images/${image}`}
         alt={alt}
@@ -45,7 +46,7 @@ export function BaseFormScreen({ children, image = "login.jpeg", alt = "imagem d
         direction="column"
         align="center"
         width={isBigDevice ? "30%" : "100%"}
-        height={"100%"}
+        minHeight="100vh"
         shadow="md"
         backgroundColor="white"
       >
