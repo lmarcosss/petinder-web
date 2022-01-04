@@ -25,7 +25,7 @@ import {
   FiFilePlus,
 } from "react-icons/fi";
 import { useToken } from "@hooks/useToken";
-import { useAnnouncementModal } from "@contexts";
+import { useAnnouncement } from "@contexts";
 import { IconType } from "react-icons";
 import { useGeolocation } from "@hooks/useGeolocation";
 
@@ -41,7 +41,7 @@ interface IMenuItems {
 export function Navbar() {
   const { isOpen, onClose } = useSidebarDrawer();
   const { hasAuth, clearToken } = useToken();
-  const { onOpen } = useAnnouncementModal();
+  const { onOpen } = useAnnouncement();
   const router = useRouter();
   const { position } = useGeolocation();
   const toast = useToast();

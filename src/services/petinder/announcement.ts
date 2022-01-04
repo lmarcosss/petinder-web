@@ -1,14 +1,22 @@
 import { getAuthorizationHeader } from "@core";
-import { IAnnouncementCreate, IAnnouncementEdit } from "@types";
+import { IAnnouncement, IAnnouncementCreate, IAnnouncementEdit } from "@types";
+import { AxiosPromise } from "axios";
 import api from "./api";
 
 const endpoint = "announcement";
 
-export function getOpennedAnnouncements() {
+export function getAnnouncements(req) {
+  const headers = getAuthorizationHeader(req);
+
+  if (headers) {
+    return api.get(`${endpoint}/logged`, { headers });
+  }
+
   return api.get(endpoint);
 }
 
-export function createAnnouncement(announcement: IAnnouncementCreate) {
+
+export function createAnnouncement(announcement: IAnnouncementCreate): AxiosPromise<IAnnouncement> {
   const headers = getAuthorizationHeader();
 
   return api.post(endpoint, announcement, { headers });

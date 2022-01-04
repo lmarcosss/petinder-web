@@ -2,7 +2,7 @@ import { Box, Icon, IconButton, Image } from "@chakra-ui/react";
 import { IAnnouncement } from "@types";
 import { AnnouncementStatusEnum } from "@enums";
 import { FiEdit } from "react-icons/fi";
-import { useAnnouncementModal } from "@contexts";
+import { useAnnouncement } from "@contexts";
 
 const cursor = {
   [AnnouncementStatusEnum.ABERTO]: "pointer",
@@ -14,10 +14,10 @@ interface IProps {
 }
 
 export function Announcement({ data, isMyAnnouncement }: IProps) {
-  const { onOpen } = useAnnouncementModal();
+  const { onOpen } = useAnnouncement();
 
   function onOpenModal() {
-    onOpen(data);
+    onOpen({ initialData: data, title: "Editar anúncio" });
   }
 
   return (
@@ -43,7 +43,7 @@ export function Announcement({ data, isMyAnnouncement }: IProps) {
           <IconButton
             onClick={onOpenModal}
             icon={<Icon as={FiEdit} />}
-            aria-label="Open edit modal"
+            aria-label="Abrir modal de editar anúncio"
             position="absolute"
             right="5"
             bottom="6"
