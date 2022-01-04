@@ -108,7 +108,7 @@ export function Navbar() {
   function logout() {
     onClose();
     clearToken();
-    setTimeout(() => router.replace("/"), 200);
+    setTimeout(() => router.replace("/login"), 200);
   }
 
   return (
