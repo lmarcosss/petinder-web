@@ -11,6 +11,7 @@ import { IAnnouncementForm } from "@types";
 import { Form } from "@unform/web";
 import { FiImage, FiType } from "react-icons/fi";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
 
 export function CreateAnnouncement() {
   const formRef = useRef(null);
@@ -25,6 +26,8 @@ export function CreateAnnouncement() {
     isMyAnnouncement,
     setMyAnnouncements,
   } = useAnnouncement();
+
+  const router = useRouter();
 
   async function handleSubmit(data: IAnnouncementForm) {
     setLoading(true);
@@ -55,6 +58,8 @@ export function CreateAnnouncement() {
           };
 
           await editAnnouncement(announcement);
+
+          router.reload();
         } else {
           const announcement = {
             ...rest,
@@ -75,7 +80,7 @@ export function CreateAnnouncement() {
             ? setMyAnnouncements
             : setAnnouncements;
 
-          onChangeAnnouncement([newAnnouncement, ...otherAnnouncements]);
+          onChangeAnnouncement([{ ...newAnnouncement, isMyAnnouncement: true }, ...otherAnnouncements]);
         }
 
         onClose();
