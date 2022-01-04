@@ -15,6 +15,7 @@ import {
   Tr,
   useBreakpointValue,
   useToast,
+  Select,
 } from "@chakra-ui/react";
 import { Header, Modal } from "@components";
 import { getAnnouncementInterests, declineInterest, acceptInterest } from "@services/petinder/interest";
@@ -31,6 +32,11 @@ function MyAnnouncements() {
 
   const [interests, setInterests] = useState([]);
   const [detailInterest, setDetailInterest] = useState(null);
+  const [selectFilter, setSelectFilter] = useState("");
+
+  const handleSelectFilter = (event) => {
+    setSelectFilter(event.target.value);
+  };
 
   const fetchInterests = useCallback(async () => {
     try {
@@ -94,21 +100,43 @@ function MyAnnouncements() {
     }
   }
   
-  const justifyContent = useBreakpointValue({
+  const justifyContentHeader = useBreakpointValue({
+    base: "center",
+    lg: "space-between",
+  });
+
+  const justifyContentTable = useBreakpointValue({
     base: undefined,
     lg: "center",
   });
 
+  const filteredInterests = interests.filter((interest) => !selectFilter || interest.status === selectFilter);
+
   return (
     <Box>
       <Header />
-      <Box padding={10}>
-        <Text fontSize="3xl" fontWeight={700}>
-          Interessados no anúncio {announcementId}
-          {detailInterest && detailInterest.id}
-        </Text>
-      </Box>
-      <Flex justifyContent={justifyContent} overflow="scroll">
+      <Flex
+        padding={10}
+        gridGap={10}
+        alignItems="center"
+        justifyContent={justifyContentHeader}
+        flexWrap="wrap"
+      >
+        <Box>
+          <Text fontSize="3xl" fontWeight={700}>
+            Interessados no anúncio {announcementId}
+            {detailInterest && detailInterest.id}
+          </Text>
+        </Box>
+        <Flex maxW={300} alignItems="center">
+          <Select placeholder="Selecione um status" onChange={handleSelectFilter} value={selectFilter}>
+            <option value={InterestStatusEnum.OPEN}>{InterestStatusEnum.OPEN}</option>
+            <option value={InterestStatusEnum.ACCEPTED}>{InterestStatusEnum.ACCEPTED}</option>
+            <option value={InterestStatusEnum.DECLINED}>{InterestStatusEnum.DECLINED}</option>
+          </Select>
+        </Flex>
+      </Flex>
+      <Flex justifyContent={justifyContentTable} overflow="scroll">
         <Table variant='simple' width="100vh">
           <Thead>
             <Tr>
@@ -119,7 +147,7 @@ function MyAnnouncements() {
             </Tr>
           </Thead>
           <Tbody>
-            {interests.map((interest) => (
+            {filteredInterests.map((interest) => (
               <Tr key={interest.id}>
                 <Td>{interest.status}</Td>
                 <Td isTruncated>{interest.interested.name}</Td>
