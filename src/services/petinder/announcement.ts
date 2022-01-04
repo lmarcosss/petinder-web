@@ -1,5 +1,6 @@
 import { getAuthorizationHeader } from "@core";
-import { IAnnouncementCreate, IAnnouncementEdit } from "@types";
+import { IAnnouncement, IAnnouncementCreate, IAnnouncementEdit } from "@types";
+import { AxiosPromise } from "axios";
 import api from "./api";
 
 const endpoint = "announcement";
@@ -8,7 +9,7 @@ export function getOpennedAnnouncements() {
   return api.get(endpoint);
 }
 
-export function createAnnouncement(announcement: IAnnouncementCreate) {
+export function createAnnouncement(announcement: IAnnouncementCreate): AxiosPromise<IAnnouncement> {
   const headers = getAuthorizationHeader();
 
   return api.post(endpoint, announcement, { headers });

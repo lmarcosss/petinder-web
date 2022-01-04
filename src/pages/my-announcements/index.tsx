@@ -7,29 +7,40 @@ import {
   InputLeftElement,
   Text,
   Icon,
+  IconButton,
 } from "@chakra-ui/react";
 import { IAnnouncement } from "@types";
-import { FiSearch } from "react-icons/fi";
+import { FiPlus, FiSearch } from "react-icons/fi";
 import { Announcements, Header } from "@components";
 import { getMyAnnouncements } from "@services/petinder/announcement";
+import { useAnnouncement } from "@contexts";
 
 interface IProps {
   announcements: IAnnouncement[];
 }
 
 function MyAnnouncements({ announcements }: IProps) {
+  const { onOpen, setMyAnnouncements, myAnnouncements } = useAnnouncement();
   const [filter, setFilter] = useState("");
   const [filteredAnnouncements, setFilteredAnnouncements] =
     useState(announcements);
 
   useEffect(() => {
-    const newFilteredAnnouncements = announcements.filter((announcement) =>
+    setMyAnnouncements(announcements);
+  }, [setMyAnnouncements, announcements]);
+
+  useEffect(() => {
+    const newFilteredAnnouncements = myAnnouncements.filter((announcement) =>
       announcement.description.includes(filter)
     );
     setFilteredAnnouncements(newFilteredAnnouncements);
-  }, [announcements, filter]);
+  }, [myAnnouncements, filter]);
 
   const handleFilterChange = (event) => setFilter(event.target.value);
+
+  function onOpenModal() {
+    onOpen({ isMyAnnouncement: true });
+  }
 
   return (
     <Box>
@@ -68,6 +79,15 @@ function MyAnnouncements({ announcements }: IProps) {
         <Box width={216} />
       </Flex>
       <Announcements isMyAnnouncements announcements={filteredAnnouncements} />
+      <IconButton
+        aria-label="Abrir modal de criar anúncio"
+        icon={<Icon as={FiPlus} />}
+        colorScheme="orange"
+        onClick={onOpenModal}
+        position="fixed"
+        right={["5", "10"]}
+        bottom={["5", "10"]}
+      />
     </Box>
   );
 }
