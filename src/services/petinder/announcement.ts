@@ -5,9 +5,16 @@ import api from "./api";
 
 const endpoint = "announcement";
 
-export function getOpennedAnnouncements() {
+export function getAnnouncements(req) {
+  const headers = getAuthorizationHeader(req);
+
+  if (headers) {
+    return api.get(`${endpoint}/logged`, { headers });
+  }
+
   return api.get(endpoint);
 }
+
 
 export function createAnnouncement(announcement: IAnnouncementCreate): AxiosPromise<IAnnouncement> {
   const headers = getAuthorizationHeader();

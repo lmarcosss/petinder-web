@@ -8,7 +8,7 @@ interface IProps {
 }
 
 function List({ announcements, isMyAnnouncements }: IProps) {
-  if (!announcements.length) {
+  if (!announcements?.length) {
     return (
       <Text align="center" p="8" fontSize={["14px", "16px"]}>
         Nenhum anúncio encontrado

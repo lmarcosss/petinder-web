@@ -8,5 +8,11 @@ function parseCookies(req) {
 export function getAuthorizationHeader(req = null) {
   const cookies = parseCookies(req);
 
-  return { "Authorization": cookies[StorageEnum.TOKEN] };
+  const token = cookies[StorageEnum.TOKEN];
+
+  if (!token) {
+    return null;
+  }
+
+  return { "Authorization": token };
 }
