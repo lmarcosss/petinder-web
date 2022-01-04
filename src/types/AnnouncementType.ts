@@ -33,6 +33,8 @@ export interface IAnnouncement {
   owner: IResponseUser;
   closed: boolean;
   city: string;
+  interestStatus: string;
+  isMyAnnouncement: boolean;
 }
 
 export interface IAnnouncementForm {

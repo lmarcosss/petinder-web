@@ -21,3 +21,8 @@ export function acceptInterest(interestId) {
   return api.post(`${endpoint}/${interestId}/accept`, null, { headers });
 }
 
+export function createInterest(announcementId) {
+  const headers = getAuthorizationHeader();
+
+  return api.post(endpoint, { announcementId }, { headers });
+}
