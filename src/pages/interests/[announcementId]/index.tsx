@@ -136,50 +136,58 @@ function MyAnnouncements() {
           </Select>
         </Flex>
       </Flex>
-      <Flex justifyContent={justifyContentTable} overflow="scroll">
-        <Table variant='simple' width="100vh">
-          <Thead>
-            <Tr>
-              <Th>Status</Th>
-              <Th>Interessado</Th>
-              <Th>Descrição</Th>
-              <Th>Avaliar</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredInterests.map((interest) => (
-              <Tr key={interest.id}>
-                <Td>{interest.status}</Td>
-                <Td isTruncated>{interest.interested.name}</Td>
-                <Td maxWidth={300} maxH={100} isTruncated>{interest.interested.description}</Td>
-                <Td>
-                  {interest.status === InterestStatusEnum.OPEN ? (
-                    <Button
-                      width="100%"
-                      size="sm"
-                      colorScheme="orange"
-                      variant="outline"
-                      onClick={() => setDetailInterest(interest)}
-                    >
-                      Avaliar interesse
-                    </Button>
-                  ) : (
-                    <>AVALIADO</>
-                  )}
-                </Td>
+      {filteredInterests.length ? (
+        <Flex justifyContent={justifyContentTable} overflow="scroll">
+          <Table variant='simple' width="100vh">
+            <Thead>
+              <Tr>
+                <Th>Status</Th>
+                <Th>Interessado</Th>
+                <Th>Descrição</Th>
+                <Th>Avaliar</Th>
               </Tr>
-            ))}
-          </Tbody>
-          <Tfoot>
-            <Tr>
-              <Th>Status</Th>
-              <Th>Interessado</Th>
-              <Th>Descrição</Th>
-              <Th>Avaliar</Th>
-            </Tr>
-          </Tfoot>
-        </Table>
-      </Flex>
+            </Thead>
+            <Tbody>
+              {filteredInterests.map((interest) => (
+                <Tr key={interest.id}>
+                  <Td>{interest.status}</Td>
+                  <Td isTruncated>{interest.interested.name}</Td>
+                  <Td maxWidth={300} maxH={100} isTruncated>{interest.interested.description}</Td>
+                  <Td>
+                    {interest.status === InterestStatusEnum.OPEN ? (
+                      <Button
+                        width="100%"
+                        size="sm"
+                        colorScheme="orange"
+                        variant="outline"
+                        onClick={() => setDetailInterest(interest)}
+                      >
+                        Avaliar interesse
+                      </Button>
+                    ) : (
+                      <>AVALIADO</>
+                    )}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+            <Tfoot>
+              <Tr>
+                <Th>Status</Th>
+                <Th>Interessado</Th>
+                <Th>Descrição</Th>
+                <Th>Avaliar</Th>
+              </Tr>
+            </Tfoot>
+          </Table>
+        </Flex>
+      ) : (
+        <Flex justifyContent="center">
+          <Text fontSize="xl" fontWeight={700}>
+            Nenhum interessado disponível
+          </Text>
+        </Flex>
+      )}
       <Modal isOpen={!!detailInterest} onClose={handleCloseModal} title="Avaliar interesse">
         <Box paddingBottom={5}>
           <Flex alignItems="flex-end">
