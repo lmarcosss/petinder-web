@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { ChakraProvider } from "@chakra-ui/react";
-import { SidebarDrawerProvider } from "@contexts";
+import { LoaderProvider, SidebarDrawerProvider } from "@contexts";
 import { AppProps } from "next/app";
 import { CookiesProvider } from "react-cookie";
 import { AnnouncementModalProvider } from "@contexts";
@@ -14,11 +14,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <CookiesProvider>
         <ChakraProvider>
-          <SidebarDrawerProvider>
-            <AnnouncementModalProvider>
-              <Component {...pageProps} />
-            </AnnouncementModalProvider>
-          </SidebarDrawerProvider>
+          <LoaderProvider>
+            <SidebarDrawerProvider>
+              <AnnouncementModalProvider>
+                <Component {...pageProps} />
+              </AnnouncementModalProvider>
+            </SidebarDrawerProvider>
+          </LoaderProvider>
         </ChakraProvider>
       </CookiesProvider>
     </>
